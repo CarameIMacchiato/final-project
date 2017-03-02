@@ -19,7 +19,6 @@ a <- body$data
 
 server <- function(input, output) {
   
-
-  
 }
   
+shinyServer(server)
