@@ -22,7 +22,6 @@ body <- fromJSON(content(response, "text"))
 body$meta
 server <- function(input, output) {
   
-
-  
 }
   
+shinyServer(server)
