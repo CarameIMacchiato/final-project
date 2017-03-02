@@ -13,13 +13,8 @@ base.url <- "https://api.instagram.com/v1/"
 
 # Get user info
 response <- GET(paste0(base.url, "users/self/", access.token))
-body <- fromJSON(content(response, "text"))
+#body <- fromJSON(content(response, "text"))
 
-# User search 
-response <- GET(paste0(base.url, "users/search?q=portugaltheman&", access.token))
-body <- fromJSON(content(response, "text"))
-
-body$meta
 server <- function(input, output) {
   
 }
