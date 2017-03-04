@@ -4,7 +4,8 @@ library(dplyr)
 library(httr)
 library(jsonlite)
 
-access.token <- "access_token=1942144530.52a837c.52b8ff2e81a5417688ef1fd8c1c5d339"
+# Sourcing the file with the keys in it. Access key is 'access.token'
+source("keys.R")
 
 base.url <- "https://api.instagram.com/v1/"
 
