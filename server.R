@@ -19,13 +19,22 @@ body <- fromJSON(content(response, "text"))
 
 body$data
 
-response <- GET(paste0(base.url, "locations/search?lat=48.858844&lng=2.294351&", access.token))
+# Get recent media from user
+response <- GET(paste0(base.url, "users/self/media/recent/?", access.token))
 body <- fromJSON(content(response, "text"))
 
-body$meta
+
+# Get the filters used in the most recent media
+body$data$filter
+
+# Bar graph for the filters from the recent media pulled
+ggplot(data = body$data) +
+  geom_bar(mapping = aes(x = body$data$filter))
+
+
 
 server <- function(input, output) {
-  
+
 }
   
 shinyServer(server)
