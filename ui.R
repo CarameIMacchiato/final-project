@@ -1,7 +1,7 @@
 library(shiny)
 library(ggplot2)
 library(dplyr)
-
+?textInput
 
 # Defining the UI
 ui <- fluidPage(
@@ -9,16 +9,23 @@ ui <- fluidPage(
   titlePanel("Instagram Project"),
   
   sidebarPanel(
-    
+    # search for instagram user
+    textInput("chosen.search", "Search Full Username*"),
+    textOutput("search.output"),
+    textOutput("search.selected.user"),
+    textOutput("search.fullname"),
+    textOutput("search.userid"),
+    textOutput("search.user.bio"),
+    p("*Note: only works for our sandbox users")
   ),
   
   mainPanel(
     navbarPage(
       tabPanel("Map"),
-      tabPanel("Search"),
       tabPanel("Heat Map"),
       tabPanel("Statistics",
                h2("Statistics"),
+               p("Filters are a big part of Instagram."),
                plotOutput("plot")),
       tabPanel("Mini Profile Page"),
       tabPanel("Privacy Policy",
