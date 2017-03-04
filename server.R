@@ -28,13 +28,19 @@ body <- fromJSON(content(response, "text"))
 body$data$filter
 
 # Bar graph for the filters from the recent media pulled
-ggplot(data = body$data) +
-  geom_bar(mapping = aes(x = body$data$filter))
-
-
+filter.bar <- ggplot(data = body$data) +
+  geom_bar(mapping = aes(x = body$data$filter)) +
+  ggtitle("Filter Statistics") +
+  labs(x="Filter Name",y="# of Times Filter is Used") 
 
 server <- function(input, output) {
 
+  output$plot <- renderPlot({
+    
+    filter.bar
+    
+  })
+  
 }
   
 shinyServer(server)
