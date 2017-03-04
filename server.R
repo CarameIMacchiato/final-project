@@ -19,10 +19,9 @@ body <- fromJSON(content(response, "text"))
 
 body$data
 
-# Get recent media from user
+# Get recent media from owner of access token
 response <- GET(paste0(base.url, "users/self/media/recent/?", access.token))
 body <- fromJSON(content(response, "text"))
-
 
 # Get the filters used in the most recent media
 body$data$filter
@@ -31,10 +30,17 @@ body$data$filter
 ggplot(data = body$data) +
   geom_bar(mapping = aes(x = body$data$filter))
 
+# User search
+response <- GET(paste0(base.url, "users/search?q=a&", access.token))
+body <- fromJSON(content(response, "text"))
 
+body$data
 
 server <- function(input, output) {
-
+  response <- GET(paste0(base.url, "users/self/?", access.token))
+  body <- fromJSON(content(response, "text"))
+  
+  body$data
 }
   
 shinyServer(server)
