@@ -36,8 +36,8 @@ filter.bar <- ggplot(data = body$data) +
 
 server <- function(input, output) {
   
-  # for searching users
-  filtered <- reactive({
+  # for general data on user (i.e. username, full name, user id, bio, etc.)
+  general.data <- reactive({
     search.response <- GET(paste0("https://api.instagram.com/v1/users/search?q=", input$chosen.search, "&", access.token))
     search.body <- fromJSON(content(search.response, "text"))
     # gets data of searched user
@@ -45,48 +45,63 @@ server <- function(input, output) {
     return(data)
   })
   
-  # check for correct response
-  output$search.output <- renderText({
-    user.data <- filtered()
-    paste0("User Input: ", input$chosen.search)
-    
+  # for user's recent media
+  recent.media <- reactive({
+    search.response <- GET(paste0("https://api.instagram.com/v1/users/search?q=", input$chosen.search, "&", access.token))
+    search.body <- fromJSON(content(search.response, "text"))
+    # gets data of searched user
+    data <- search.body$data
+    user.id <- data$id
+    media.response <- GET(paste0("https://api.instagram.com/v1/users/", user.id, "/media/recent/?", access.token))
+    media.body <- fromJSON(content(media.response, "text"))
+    media.data <- media.body$data
+    return(media.data)
   })
   
-  # check for correct response
-  output$search.selected.user <- renderText({
-    user.data <- filtered()
-    paste0("Selected User: ", user.data$username)
-    
-  })
-  
-  # check for correct response
-  output$search.fullname <- renderText({
-    user.data <- filtered()
-    paste0("Full name : ", user.data$full_name)
-  })
-  
-  # check for correct response
-  output$search.userid <- renderText({
-    user.data <- filtered()
-    paste0("User Id: ", user.data$id)
-    
-  })
-  
-  # check for correct response
-  output$search.user.bio <- renderText({
-    user.data <- filtered()
-    paste0("Bio: ", user.data$bio)
-    
-  })
-
+  # plot of filters
   output$plot <- renderPlot({
-    
-    ggplot(data = body$data) +
-      geom_bar(mapping = aes(x = body$data$filter)) +
+    filter.data <- recent.media()
+    ggplot(data = filter.data) +
+      geom_bar(mapping = aes(x = filter.data$filter)) +
       ggtitle("Filter Statistics") +
       labs(x="Filter Name", y="# of Times Filter is Used") 
     
   })
+  
+  # renders user input from search box
+  output$search.output <- renderText({
+    user.data <- general.data()
+    paste0("User Input: ", input$chosen.search)
+    
+  })
+  
+  # check for correct response for username
+  output$search.selected.user <- renderText({
+    user.data <- general.data()
+    paste0("Selected User: ", user.data$username)
+    
+  })
+  
+  # check for correct response for full name
+  output$search.fullname <- renderText({
+    user.data <- general.data()
+    paste0("Full name : ", user.data$full_name)
+  })
+  
+  # check for correct response for user id
+  output$search.userid <- renderText({
+    user.data <- general.data()
+    paste0("User Id: ", user.data$id)
+    
+  })
+  
+  # check for correct response for user bio
+  output$search.user.bio <- renderText({
+    user.data <- general.data()
+    paste0("Bio: ", user.data$bio)
+    
+  })
+
   
 }
   

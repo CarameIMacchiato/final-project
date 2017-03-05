@@ -16,7 +16,7 @@ ui <- fluidPage(
     textOutput("search.fullname"),
     textOutput("search.userid"),
     textOutput("search.user.bio"),
-    p("*Note: only works for our sandbox users")
+    p(em("*Note: only works for our sandbox users"))
   ),
   
   mainPanel(
