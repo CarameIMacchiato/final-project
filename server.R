@@ -11,10 +11,22 @@ source("keys.R")
 
 base.url <- "https://api.instagram.com/v1/"
 
+# Get recent media from user
+response <- GET(paste0(base.url, "users/self/media/recent/?", access.token))
+body <- fromJSON(content(response, "text"))
+
+
+# Get the filters used in the most recent media
+body$data$filter
+
+# Bar graph for the filters from the recent media pulled
+ggplot(data = body$data) +
+  geom_bar(mapping = aes(x = body$data$filter))
+
 # example url is https://api.instagram.com/v1/users/self/?access_token=ACCESS-TOKEN
 # Format is base url / request / access key
-# In case : 6ff7a923483441ea8b19c9ecd8b23d5a
 
+# MAP SECTION
 
 # Search for a user
 response.search <- GET(paste0(base.url, "users/search?q=squiwardtennisballs324&", access.token))
@@ -40,14 +52,8 @@ server <- function(input, output) {
     m  # Print the map
   })
   
-  output$heatmap <- renderLeaflet({
-    
-  })
+
 }
 
 shinyServer(server)
-
-#map stufff
-
-
 
