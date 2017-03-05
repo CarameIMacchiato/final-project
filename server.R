@@ -46,7 +46,7 @@ server <- function(input, output) {
   output$maps <- renderLeaflet({
     m <- leaflet() %>%
       addTiles() %>%
-      addMarkers(lng= long, lat= lat, popup= paste(sep = "<br>", links, usernames, captions),
+      addMarkers(lng= long, lat= lat, popup= paste(sep = "<br>", links, paste0("<b><i>", usernames, "</i></b>"), captions),
                  clusterOptions = markerClusterOptions())
       
     m  # Print the map
