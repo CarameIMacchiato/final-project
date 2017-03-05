@@ -1,24 +1,42 @@
 library(shiny)
 library(ggplot2)
 library(dplyr)
-
+?textInput
 
 # Defining the UI
-ui <- fluidPage(
+ui <- fluidPage(theme = "bootstrap.css",
  
   titlePanel("Instagram Project"),
 
   sidebarPanel(
+
+    # search for instagram user
+    textInput("chosen.search", "Search Full Username*"),
+    textOutput("search.output"),
+    textOutput("search.selected.user"),
+    textOutput("search.fullname"),
+    textOutput("search.userid"),
+    textOutput("search.user.bio"),
+    p(em("*Note: only works for our sandbox users"))
     
   ),
   
   mainPanel(
     navbarPage(
-      tabPanel("Search"),
+      tabPanel("Something"),
       tabPanel("Map", leafletOutput('maps')),
-      tabPanel("Heat Map"),
-      tabPanel("Statistics"),
-      tabPanel("Mini Profile Page"),
+      tabPanel("Statistics",
+               h2("Statistics"),
+               p("Filters are a big part of Instagram."),
+               plotOutput("plot")),
+      tabPanel("Mini Profile Page",
+               h3(textOutput("selected.user")), 
+               textOutput(img("", src = 'pic')), # Look here
+               p(strong("Following: "), textOutput("following", inline = TRUE), strong("Follows: "), textOutput("follows", inline = TRUE),
+               strong("Media Count: "), textOutput("media.count", inline = TRUE)),
+               p(strong("Name: "), textOutput("name", inline = TRUE)),
+               p(strong("Bio: "), textOutput("bio", inline = TRUE))
+      ),
       tabPanel("Privacy Policy",
                h2("Privacy Policy"),
                p("This privacy policy has been compiled to better serve those who are concerned with how their 'Personally Identifiable Information' (PII) is being used online. PII, as described in US privacy law and information security, is information that can be used on its own or with other information to identify, contact, or locate a single person, or to identify an individual in context. Please read our privacy policy carefully to get a clear understanding of how we collect, use, protect or otherwise handle your Personally Identifiable Information in accordance with our website."),
