@@ -152,9 +152,12 @@ server <- function(input, output) {
   # Profile pic for profile page # Here too.
   output$pic <- renderUI({
     user.data <- general.data()
-    tags$img(imageOutput('pic'), src = user.data$profile_pic)
+    src = user.data$profile_pic
+    tags$img(src = src)
   })
   
+  
+  # Creation of maps with leaflet
   output$maps <- renderLeaflet({
     map.final <- map.stuff()
     m <- leaflet() %>%
