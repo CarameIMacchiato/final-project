@@ -136,10 +136,10 @@ server <- function(input, output) {
     paste(user.data$bio)
   })
   
-  # Profile pic for profile page
+  # Profile pic for profile page # Here too.
   output$pic <- renderText({
     user.data <- general.data()
-    paste(user.data$profile_pic)
+    return(paste0(user.data$profile_pic))
   })
 
 }
