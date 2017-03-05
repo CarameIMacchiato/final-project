@@ -7,7 +7,7 @@ library(dplyr)
 ui <- fluidPage(theme = "bootstrap.css",
  
   titlePanel("Instagram Project"),
-  
+
   sidebarPanel(
 
     # search for instagram user
@@ -23,8 +23,8 @@ ui <- fluidPage(theme = "bootstrap.css",
   
   mainPanel(
     navbarPage(
-      tabPanel("Map"),
-      tabPanel("Heat Map"),
+      tabPanel("Something"),
+      tabPanel("Map", leafletOutput('maps')),
       tabPanel("Statistics",
                h2("Statistics"),
                p("Filters are a big part of Instagram."),
@@ -123,3 +123,4 @@ ui <- fluidPage(theme = "bootstrap.css",
 )
 
 shinyUI(ui)
+

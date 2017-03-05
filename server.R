@@ -3,6 +3,8 @@ library(ggplot2)
 library(dplyr)
 library(httr)
 library(jsonlite)
+library(leaflet)
+
 
 # Sourcing the file with the keys in it. Access key is 'access.token'
 source("keys.R")
@@ -54,6 +56,17 @@ server <- function(input, output) {
     specific.data <- specific.body$data
     specific.counts <- specific.data$counts
     return(specific.counts)
+  })
+  
+  map.stuff <- reactive({
+    media.frame <- data.frame(recent.media())
+    long <- if(!exists("long")) long <- media.frame$location$longitude else append( long, body.pics$data$location$longitude)
+    lat <- if(!exists("lat")) lat <- media.frame$location$latitude else append( lat, body.pics$data$location$latitude)
+    links <- if(!exists("links")) links <- (paste0("<img src=\"", media.frame$images$thumbnail$url, "\">")) else append( links, (paste0("<img src=\"", body.pics$data$images$thumbnail$url, "\">")))
+    captions <- if(!exists("captions")) captions <- media.frame$caption$text else append(captions, body.pics$data$caption$text)
+    usernames <- if(!exists("usernames")) usernames <- media.frame$user$username else append(usernames, body.pics$data$user$username)
+    map.info <- data.frame(long, lat, links, captions, usernames)
+    return(map.info)
   })
   
   # plot of filters
@@ -141,7 +154,18 @@ server <- function(input, output) {
     user.data <- general.data()
     tags$img(imageOutput('pic'), src = user.data$profile_pic)
   })
+  
+  output$maps <- renderLeaflet({
+    map.final <- map.stuff()
+    m <- leaflet() %>%
+      addTiles() %>%
+      addMarkers(lng= map.final$long, lat= map.final$lat, popup= paste(sep = "<br>", map.final$links, paste0("<b><i>", map.final$usernames, "</i></b>"), map.final$captions),
+                 clusterOptions = markerClusterOptions())
+    
+    m  # Print the map
+  })
 
 }
-  
+
 shinyServer(server)
+
