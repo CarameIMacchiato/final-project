@@ -135,6 +135,12 @@ server <- function(input, output) {
     user.data <- general.data()
     paste(user.data$bio)
   })
+  
+  # Profile pic for profile page
+  output$pic <- renderText({
+    user.data <- general.data()
+    paste(user.data$profile_pic)
+  })
 
 }
   
