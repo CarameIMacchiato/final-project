@@ -14,10 +14,8 @@ ui <- fluidPage(
   
   mainPanel(
     navbarPage(
-               tabPanel("Map"),
-               tabPanel("Search"),
-               tabPanel("Heat Map"),
                tabPanel("Statistics"),
+               tabPanel("Not Map", leafletOutput('maps')),
                tabPanel("Mini Profile Page")
                
     )
