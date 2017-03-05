@@ -62,7 +62,7 @@ server <- function(input, output) {
   output$plot <- renderPlot({
     filter.data <- recent.media()
     ggplot(data = filter.data) +
-      geom_bar(mapping = aes(x = filter.data$filter)) +
+      geom_bar(mapping = aes(x = filter.data$filter, fill = filter.data$filter)) +
       ggtitle("Filter Statistics") +
       labs(x="Filter Name", y="# of Times Filter is Used") 
     
