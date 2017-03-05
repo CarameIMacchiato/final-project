@@ -31,10 +31,16 @@ ggplot(data = body$data) +
   geom_bar(mapping = aes(x = body$data$filter))
 
 # User search
-response <- GET(paste0(base.url, "users/search?q=a&", access.token))
+response <- GET(paste0(base.url, "users/search?q=onaregul_r&", access.token))
 body <- fromJSON(content(response, "text"))
 
-body$data
+body$data$id
+
+# Follow a user with their user ID
+response <- POST(url = paste0(base.url, "users/", body$data$id, "/relationship?", access.token), body = list(action = "follow"))
+body <- fromJSON(content(response, "text"))
+
+
 
 server <- function(input, output) {
   response <- GET(paste0(base.url, "users/self/?", access.token))

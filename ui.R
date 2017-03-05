@@ -4,7 +4,7 @@ library(dplyr)
 
 
 # Defining the UI
-ui <- fluidPage(
+ui <- fluidPage(theme = "bootstrap.css",
  
   titlePanel("Instagram Project"),
   
@@ -19,7 +19,7 @@ ui <- fluidPage(
       tabPanel("Heat Map"),
       tabPanel("Statistics"),
       tabPanel("Mini Profile Page",
-               h3(body$data$username, img("", src = body$data$profile_picture)),
+               h3(body$data$username, img("", src = body$data$profile_picture, class = "img-thumbnail")),
                p(strong("Following: "), body$data$counts$follows, strong("  Followers: "), body$data$counts$follows, strong("  Media Count: "), body$data$counts$media),
                p(strong("Name: "), body$data$full_name),
                p(strong("Bio: "), body$data$bio)
