@@ -19,10 +19,9 @@ body <- fromJSON(content(response, "text"))
 
 body$data
 
-# Get recent media from user
+# Get recent media from owner of access token
 response <- GET(paste0(base.url, "users/self/media/recent/?", access.token))
 body <- fromJSON(content(response, "text"))
-
 
 # Get the filters used in the most recent media
 body$data$filter
@@ -32,6 +31,7 @@ filter.bar <- ggplot(data = body$data) +
   geom_bar(mapping = aes(x = body$data$filter)) +
   ggtitle("Filter Statistics") +
   labs(x="Filter Name", y="# of Times Filter is Used")
+
 
 
 server <- function(input, output) {
@@ -56,6 +56,20 @@ server <- function(input, output) {
     media.body <- fromJSON(content(media.response, "text"))
     media.data <- media.body$data
     return(media.data)
+  })
+  
+  # for more specific user data (followers, following, etc.)
+  specific.counts <- reactive({
+    search.response <- GET(paste0("https://api.instagram.com/v1/users/search?q=", input$chosen.search, "&", access.token))
+    search.body <- fromJSON(content(search.response, "text"))
+    # gets data of searched user
+    data <- search.body$data
+    user.id <- data$id
+    specific.response <- GET(paste0("https://api.instagram.com/v1/users/", user.id, "/", access.token))
+    specific.body <- fromJSON(content(specific.response, "text"))
+    specific.data <- specific.body$data
+    specific.counts <- specific.data$counts
+    return(specific.counts)
   })
   
   # plot of filters
@@ -101,8 +115,13 @@ server <- function(input, output) {
     paste0("Bio: ", user.data$bio)
     
   })
-
   
+  # check for correct response for username
+  output$selected.user <- renderText({
+    user.data <- general.data()
+    paste(user.data$username)
+  })
+
 }
   
 shinyServer(server)
