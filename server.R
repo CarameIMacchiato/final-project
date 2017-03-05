@@ -65,7 +65,7 @@ server <- function(input, output) {
     # gets data of searched user
     data <- search.body$data
     user.id <- data$id
-    specific.response <- GET(paste0("https://api.instagram.com/v1/users/", user.id, "/", access.token))
+    specific.response <- GET(paste0("https://api.instagram.com/v1/users/", user.id, "/?", access.token))
     specific.body <- fromJSON(content(specific.response, "text"))
     specific.data <- specific.body$data
     specific.counts <- specific.data$counts
@@ -116,10 +116,34 @@ server <- function(input, output) {
     
   })
   
-  # check for correct response for username
+  # Username for profile page
   output$selected.user <- renderText({
     user.data <- general.data()
     paste(user.data$username)
+  })
+  
+  # Count of followees for profile page
+  output$following <- renderText({
+    follow.counts <- specific.counts()
+    paste(follow.counts$follows)
+  })
+  
+  # Count of followers for profile page
+  output$follows <- renderText({
+    follow.counts <- specific.counts()
+    paste(follow.counts$followed_by)
+  })
+  
+  # Count of media count for profile page
+  output$media.count <- renderText({
+    follow.counts <- specific.counts()
+    paste(follow.counts$media)
+  })
+  
+  # Count of media count for profile page
+  output$name <- renderText({
+    user.data <- general.data()
+    paste(user.data$full_name)
   })
 
 }
