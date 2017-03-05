@@ -15,7 +15,7 @@ Features to make!
 - Comment Feature
   - put a comment on an image
 
-Published: https://monmon.shinyapps.io/final-project/
+Published: https://monmon.shinyapps.io/final-project/ 
 
 To generate a new access token and add a new user follow this link and use the info found in keys.[id]: url "title"
 
