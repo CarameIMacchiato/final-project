@@ -1,7 +1,7 @@
 library(shiny)
 library(ggplot2)
 library(dplyr)
-?textInput
+
 
 # Defining the UI
 ui <- fluidPage(theme = "bootstrap.css",

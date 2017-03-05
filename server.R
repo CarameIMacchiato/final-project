@@ -4,7 +4,7 @@ library(dplyr)
 library(httr)
 library(jsonlite)
 library(leaflet)
-
+# install.packages("leaflet")
 
 # Sourcing the file with the keys in it. Access key is 'access.token'
 source("keys.R")
