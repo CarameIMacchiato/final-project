@@ -9,7 +9,6 @@ ui <- fluidPage(theme = "bootstrap.css",
   titlePanel("Instagram Project"),
   
   sidebarPanel(
-
   ),
   
   mainPanel(

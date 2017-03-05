@@ -41,7 +41,6 @@ response <- POST(url = paste0(base.url, "users/", body$data$id, "/relationship?"
 body <- fromJSON(content(response, "text"))
 
 
-
 server <- function(input, output) {
   response <- GET(paste0(base.url, "users/self/?", access.token))
   body <- fromJSON(content(response, "text"))
