@@ -18,6 +18,7 @@ ui <- fluidPage(
       tabPanel("Search"),
       tabPanel("Heat Map"),
       tabPanel("Statistics"),
+      tabPanel("Sample Plot", plotOutput("bar_chart", hover = "mouse_over", click = "bar_click")),
       tabPanel("Mini Profile Page"),
       tabPanel("Privacy Policy",
                h2("Privacy Policy"),
