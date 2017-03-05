@@ -31,7 +31,7 @@ ui <- fluidPage(theme = "bootstrap.css",
                plotOutput("plot")),
       tabPanel("Mini Profile Page",
                h3(textOutput("selected.user")), 
-               textOutput(img("", src = 'pic')), # Look here
+               uiOutput('pic'), # Look here
                p(strong("Following: "), textOutput("following", inline = TRUE), strong("Follows: "), textOutput("follows", inline = TRUE),
                strong("Media Count: "), textOutput("media.count", inline = TRUE)),
                p(strong("Name: "), textOutput("name", inline = TRUE)),

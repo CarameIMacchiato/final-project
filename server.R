@@ -137,9 +137,9 @@ server <- function(input, output) {
   })
   
   # Profile pic for profile page # Here too.
-  output$pic <- renderText({
+  output$pic <- renderUI({
     user.data <- general.data()
-    return(paste0(user.data$profile_pic))
+    tags$img(imageOutput('pic'), src = user.data$profile_pic)
   })
 
 }
