@@ -17,22 +17,6 @@ base.url <- "https://api.instagram.com/v1/"
 response <- GET(paste0(base.url, "users/self/?", access.token))
 body <- fromJSON(content(response, "text"))
 
-body$data
-
-# Get recent media from owner of access token
-response <- GET(paste0(base.url, "users/self/media/recent/?", access.token))
-body <- fromJSON(content(response, "text"))
-
-# Get the filters used in the most recent media
-body$data$filter
-
-# Bar graph for the filters from the recent media pulled
-filter.bar <- ggplot(data = body$data) +
-  geom_bar(mapping = aes(x = body$data$filter)) +
-  ggtitle("Filter Statistics") +
-  labs(x="Filter Name", y="# of Times Filter is Used")
-
-
 
 server <- function(input, output) {
   
@@ -140,10 +124,16 @@ server <- function(input, output) {
     paste(follow.counts$media)
   })
   
-  # Count of media count for profile page
+  # Name for profile page
   output$name <- renderText({
     user.data <- general.data()
     paste(user.data$full_name)
+  })
+  
+  # Count of media count for profile page
+  output$bio <- renderText({
+    user.data <- general.data()
+    paste(user.data$bio)
   })
 
 }
