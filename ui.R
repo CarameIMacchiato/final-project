@@ -12,11 +12,6 @@ ui <- fluidPage(theme = "bootstrap.css",
 
     # search for instagram user
     textInput("chosen.search", "Search Full Username*"),
-    textOutput("search.output"),
-    textOutput("search.selected.user"),
-    textOutput("search.fullname"),
-    textOutput("search.userid"),
-    textOutput("search.user.bio"),
     p(em("*Note: only works for our sandbox users"))
     
   ),
