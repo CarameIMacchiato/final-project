@@ -132,10 +132,7 @@ server <- function(input, output) {
                  clusterOptions = markerClusterOptions())
     
     m  # Print the map
-<<<<<<< HEAD
-    
-=======
->>>>>>> master
+
   })
 
 }
