@@ -28,8 +28,7 @@ media.body <- fromJSON(content(media.response, "text"))
 media.result <- flatten(media.body$data)
 
 server <- function(input, output) {
-
-
+  
   # for general data on user (i.e. username, full name, user id, bio, etc.)
   general.data <- reactive({
     search.response <- GET(paste0("https://api.instagram.com/v1/users/search?q=", input$chosen.search, "&", access.token))
@@ -68,7 +67,7 @@ server <- function(input, output) {
   specific.counts <- reactive({
     search.response <- GET(paste0("https://api.instagram.com/v1/users/search?q=", input$chosen.search, "&", access.token))
     search.body <- fromJSON(content(search.response, "text"))
-
+    
     if(length(search.body$data) == 0){
       search.response <- GET(paste0("https://api.instagram.com/v1/users/search?q=acccelgor", "&", access.token))
       search.body <- fromJSON(content(search.response, "text"))
@@ -105,7 +104,7 @@ server <- function(input, output) {
       labs(x="Filter Name", y="# of Times Filter is Used", fill = "Filter Name") 
     
   })
-
+  
   # Username for profile page
   output$selected.user <- renderText({
     user.data <- general.data()
