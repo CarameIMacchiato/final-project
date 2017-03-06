@@ -93,13 +93,13 @@ server <- function(input, output) {
   })
   
   
-  # plot of filters
+  # plot of filters, add slider
   output$plot <- renderPlot({
     filter.data <- recent.media()
     ggplot(data = filter.data) +
-      geom_bar(mapping = aes(x = filter.data$filter, fill = filter.data$filter)) +
+      geom_bar(mapping = aes(x = filter.data$filter), fill = "#2b8cbe") +
       ggtitle("Filter Statistics") +
-      labs(x="Filter Name", y="# of Times Filter is Used", fill = "Filter Name") 
+      labs(x="Filter Name", y="# of Times Filter is Used") 
     
   })
   
