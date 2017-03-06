@@ -31,6 +31,12 @@ server <- function(input, output) {
   general.data <- reactive({
     search.response <- GET(paste0("https://api.instagram.com/v1/users/search?q=", input$chosen.search, "&", access.token))
     search.body <- fromJSON(content(search.response, "text"))
+    
+    if(length(search.body$data) == 0){
+      search.response <- GET(paste0("https://api.instagram.com/v1/users/search?q=acccelgor", "&", access.token))
+      search.body <- fromJSON(content(search.response, "text"))
+    }
+    
     # gets data of searched user
     data <- search.body$data
     return(data)
@@ -40,6 +46,12 @@ server <- function(input, output) {
   recent.media <- reactive({
     search.response <- GET(paste0("https://api.instagram.com/v1/users/search?q=", input$chosen.search, "&", access.token))
     search.body <- fromJSON(content(search.response, "text"))
+    
+    if(length(search.body$data) == 0){
+      search.response <- GET(paste0("https://api.instagram.com/v1/users/search?q=acccelgor", "&", access.token))
+      search.body <- fromJSON(content(search.response, "text"))
+    }
+    
     # gets data of searched user
     data <- search.body$data
     user.id <- data$id
@@ -53,6 +65,12 @@ server <- function(input, output) {
   specific.counts <- reactive({
     search.response <- GET(paste0("https://api.instagram.com/v1/users/search?q=", input$chosen.search, "&", access.token))
     search.body <- fromJSON(content(search.response, "text"))
+
+    if(length(search.body$data) == 0){
+      search.response <- GET(paste0("https://api.instagram.com/v1/users/search?q=acccelgor", "&", access.token))
+      search.body <- fromJSON(content(search.response, "text"))
+    }
+    
     # gets data of searched user
     data <- search.body$data
     user.id <- data$id
