@@ -6,7 +6,7 @@ library(dplyr)
 # Defining the UI
 ui <- fluidPage(theme = "bootstrap.css",
  
-  h1("Instagram Project", class = "page-header"),
+  tags$div(h1("Instagram Project" ), class = "jumbotron"),
 
   sidebarPanel(
     
@@ -24,7 +24,7 @@ ui <- fluidPage(theme = "bootstrap.css",
   ),
   
   mainPanel(
-    tabsetPanel(type = "tabs",
+    tags$div(tabsetPanel(type = "tabs",
       tabPanel("Map", leafletOutput('maps')),
       tabPanel("Statistics",
                h2("Statistics"),
@@ -93,7 +93,7 @@ ui <- fluidPage(theme = "bootstrap.css",
                p("gutierrezc92@yahoo.com"),
                p("Last Edited on 2017-03-01")
       )
-    )
+    ), class = "well")
   )
    
 )

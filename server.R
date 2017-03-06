@@ -19,11 +19,11 @@ base.url <- "https://api.instagram.com/v1/"
 response <- GET(paste0(base.url, "users/self/?", access.token))
 body <- fromJSON(content(response, "text"))
 
-
 search.response <- GET(paste0("https://api.instagram.com/v1/users/search?q=a", "&", access.token))
 search.body <- fromJSON(content(search.response, "text"))
 
-length(search.body$data)
+
+
 
 server <- function(input, output) {
   
@@ -146,7 +146,6 @@ server <- function(input, output) {
     tags$img(src = src)
   })
   
-  
   # Creation of maps with leaflet
   output$maps <- renderLeaflet({
     map.final <- map.stuff()
@@ -156,6 +155,15 @@ server <- function(input, output) {
                  clusterOptions = markerClusterOptions())
     
     m  # Print the map
+  })
+  
+  # Recent picture of user for background
+  output$last.image <- renderUI({
+    last.pic <- recent.media()
+    last.pic <- flatten(last.pic)
+    last.pic <- slice(last.pic, 1) 
+    src = last.pic$images.standard_resolution.url
+    tags$img(src = src)
   })
 
 }
