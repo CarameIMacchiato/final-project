@@ -121,7 +121,7 @@ server <- function(input, output) {
   })
   
   
-  # plot of filters, add slider
+  # plot of filters
   output$plot <- renderPlot({
     filter.data <- recent.media()
     ggplot(data = filter.data) +
