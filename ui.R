@@ -11,14 +11,14 @@ ui <- fluidPage(
   sidebarPanel(
     
   ),
-  
   mainPanel(
     navbarPage(
       tabPanel("Map"),
       tabPanel("Search"),
       tabPanel("Heat Map"),
       tabPanel("Statistics"),
-      tabPanel("Sample Plot", plotOutput("bar_chart", hover = "mouse_over", click = "bar_click")),
+      tabPanel("Sample Plot", plotlyOutput("bar_chart"), 
+                             uiOutput("click")),
       tabPanel("Mini Profile Page"),
       tabPanel("Privacy Policy",
                h2("Privacy Policy"),
