@@ -34,7 +34,7 @@ server <- function(input, output) {
   #for the bar chart about likes in each picture
   output$bar_chart <- renderPlotly({
     media.result$created_time <- as.POSIXct(as.numeric(media.result$created_time),origin="1970-01-01",tz=Sys.timezone())
-    media.result$number <- nrow(insta.result):1
+    media.result$number <- nrow(media.result):1
     g <- ggplot(data = media.result, aes(x = number, y = likes.count, fill = comments.count)) +
       geom_bar(stat = "identity") + labs(x = "Numbers of Pictures", y = ("LIKES"), fill = "Comments counts") 
     g <- ggplotly(g)
