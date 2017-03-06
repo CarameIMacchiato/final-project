@@ -75,41 +75,7 @@ server <- function(input, output) {
     ggplot(data = filter.data) +
       geom_bar(mapping = aes(x = filter.data$filter, fill = filter.data$filter)) +
       ggtitle("Filter Statistics") +
-      labs(x="Filter Name", y="# of Times Filter is Used") 
-    
-  })
-  
-  # renders user input from search box
-  output$search.output <- renderText({
-    user.data <- general.data()
-    paste0("User Input: ", input$chosen.search)
-    
-  })
-  
-  # check for correct response for username
-  output$search.selected.user <- renderText({
-    user.data <- general.data()
-    paste0("Selected User: ", user.data$username)
-    
-  })
-  
-  # check for correct response for full name
-  output$search.fullname <- renderText({
-    user.data <- general.data()
-    paste0("Full name : ", user.data$full_name)
-  })
-  
-  # check for correct response for user id
-  output$search.userid <- renderText({
-    user.data <- general.data()
-    paste0("User Id: ", user.data$id)
-    
-  })
-  
-  # check for correct response for user bio
-  output$search.user.bio <- renderText({
-    user.data <- general.data()
-    paste0("Bio: ", user.data$bio)
+      labs(x="Filter Name", y="# of Times Filter is Used", fill = "Filter Name") 
     
   })
   
