@@ -75,7 +75,7 @@ server <- function(input, output) {
     ggplot(data = filter.data) +
       geom_bar(mapping = aes(x = filter.data$filter, fill = filter.data$filter)) +
       ggtitle("Filter Statistics") +
-      labs(x="Filter Name", y="# of Times Filter is Used", fill = "Filter Names") 
+      labs(x="Filter Name", y="# of Times Filter is Used", fill = "Filter Name") 
     
   })
   
@@ -132,7 +132,10 @@ server <- function(input, output) {
                  clusterOptions = markerClusterOptions())
     
     m  # Print the map
+<<<<<<< HEAD
     
+=======
+>>>>>>> master
   })
 
 }
