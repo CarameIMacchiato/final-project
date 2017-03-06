@@ -9,17 +9,17 @@ ui <- fluidPage(theme = "bootstrap.css",
   h1("Instagram Project", class = "page-header"),
 
   sidebarPanel(
-
+    
     # Search for instagram user
     textInput("chosen.search", strong("Search Full Username")),
     p(em("Note: only works for our sandbox users", class = "text-info", class = "small")),
     
     # Display profile
-    h3(uiOutput('pic', class = "img-thumbnail"), textOutput("selected.user", inline = TRUE)),
+    h4(uiOutput('pic', class = "img-thumbnail"), textOutput("selected.user", inline = TRUE)),
     p(strong("Following: "), textOutput("following", inline = TRUE), strong("Followers: "), textOutput("follows", inline = TRUE),
     strong("Media Count: "), textOutput("media.count", inline = TRUE)),
     p(strong("Name: "), textOutput("name", inline = TRUE)),
-    p(strong("Bio: "), textOutput("bio", inline = TRUE)),
+    p(strong("Bio: "), textOutput("bio", inline = TRUE))
     
   ),
   
