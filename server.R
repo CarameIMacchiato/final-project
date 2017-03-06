@@ -3,11 +3,9 @@ library(ggplot2)
 library(dplyr)
 library(httr)
 library(jsonlite)
-library(anytime)
 library(plotly)
 library(leaflet)
 # install.packages("leaflet")
-# install.packages("anytime")
 # install.packages("plotly)
 
 # Sourcing the file with the keys in it. Access key is 'access.token'
@@ -30,29 +28,6 @@ media.body <- fromJSON(content(media.response, "text"))
 media.result <- flatten(media.body$data)
 
 server <- function(input, output) {
-  
-  #for the bar chart about likes in each picture
-  output$bar_chart <- renderPlotly({
-    media.result$created_time <- as.POSIXct(as.numeric(media.result$created_time),origin="1970-01-01",tz=Sys.timezone())
-    media.result$image.num <- nrow(insta.result):1
-    g <- ggplot(data = media.result, aes(x = image.num, y = likes.count, fill = comments.count)) +
-      geom_bar(stat = "identity") + labs(x = "Image Number", y = "LIKES", fill = "Comments counts") 
-    g <- ggplotly(g)
-   })
-  
-  #the picture of each instagrame photo
-  output$click <- renderUI({
-    bar <- event_data("plotly_click")
-    link <- media.result[bar$x, "images.low_resolution.url"]
-    x <- tags$img(src = link)
-
-    if (is.null(bar)) {
-      "Click the bar for the Image!!!"
-    } else {
-      "Image: "
-      x
-    }
-  })
 
 
   # for general data on user (i.e. username, full name, user id, bio, etc.)
@@ -185,7 +160,32 @@ server <- function(input, output) {
     
     m  # Print the map
   })
-
+  
+  #for the bar chart about likes in each picture
+  output$bar_chart <- renderPlotly({
+    media.result <- recent.media()
+    media.result <- flatten(media.result)
+    media.result$number <- nrow(media.result):1
+    g <- ggplot(data = media.result, aes(x = number, y = likes.count, fill = comments.count)) +
+      geom_bar(stat = "identity") + labs(x = "Numbers of Pictures", y = ("LIKES"), fill = "Comments counts") 
+    g <- ggplotly(g)
+  })
+  
+  #the picture of each instagrame photo
+  output$click <- renderUI({
+    media.result <- recent.media()
+    media.result <- flatten(media.result)
+    bar <- event_data("plotly_click")
+    link <- media.result[bar$x, "images.low_resolution.url"]
+    x <- tags$img(src = link)
+    
+    if (is.null(bar)) {
+      "Click the bar for the Image!!!"
+    } else {
+      "Image: "
+      x
+    }
+  })
 }
 
 shinyServer(server)
