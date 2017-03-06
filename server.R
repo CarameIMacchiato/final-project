@@ -122,7 +122,7 @@ server <- function(input, output) {
   
   
   # plot of filters
-  output$plot <- renderPlot({
+  output$plot <- renderPlotly({
     filter.data <- recent.media()
     ggplot(data = filter.data) +
       geom_bar(mapping = aes(x = filter.data$filter), fill = "#2b8cbe") +
