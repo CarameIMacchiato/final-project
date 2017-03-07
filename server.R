@@ -164,25 +164,27 @@ server <- function(input, output) {
   output$bar_chart <- renderPlotly({
     media.result <- recent.media()
     media.result <- flatten(media.result)
+    media.result <- select(media.result, created_time, likes.count, comments.count, images.low_resolution.url)
     media.result$number <- nrow(media.result):1
-    g <- ggplot(data = media.result, aes(x = number, y = likes.count, fill = comments.count)) +
-      geom_bar(stat = "identity") + labs(x = "Numbers of Pictures", y = ("LIKES"), fill = "Comments counts") 
-    g <- ggplotly(g)
+    media.result$created_time <- as.POSIXct(as.numeric(media.result$created_time), origin = "1970-01-01")
+    colnames(media.result) <- c("Time", "LIKEs", "Comments", "url", "Image")
+    g <- ggplot(data = media.result, aes(x = Image, y = LIKEs, fill = factor(Comments), label = Time, label2 = LIKEs, label3 = Comments)) +
+      geom_bar(stat = "identity", color = "purple") + 
+      labs(x = "Image #", y = ("LIKES"), fill = "Comments") +
+      scale_x_discrete(limits = 1:nrow(media.result))
+    g <- ggplotly(g, width = 700, tooltip = c("x", "label", "label2", "label3")) 
   })
-  
   #the picture of each instagrame photo
   output$click <- renderUI({
     media.result <- recent.media()
     media.result <- flatten(media.result)
     bar <- event_data("plotly_click")
     link <- media.result[bar$x, "images.low_resolution.url"]
-    x <- tags$img(src = link)
-    
+
     if (is.null(bar)) {
-      "Click the bar for the Image!!!"
+      tags$strong("Click the bar for the Image!!!")
     } else {
-      "Image: "
-      x
+      tags$img(src = link)
     }
   })
 }
