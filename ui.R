@@ -40,7 +40,7 @@ ui <- fluidPage(theme = "bootstrap.css",
                p("This graph shows which filters the user uses the most, which can say a lot about wht kind of photos they take")
                ),
       tabPanel("Map", leafletOutput('maps')),
-      tabPanel("Image Data", plotlyOutput("bar_chart"), 
+      tabPanel("Image Data", plotlyOutput("bar_chart"), hr(), 
                uiOutput("click")),
       tabPanel("Statistics",
                h2("Statistics"),
