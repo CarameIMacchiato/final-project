@@ -96,12 +96,14 @@ server <- function(input, output) {
   
   
   # plot of filters
-  output$plot <- renderPlotly({
+  output$filter_plot <- renderPlotly({
     filter.data <- recent.media()
-    ggplot(data = filter.data) +
+    filter <- ggplot(data = filter.data) +
       geom_bar(mapping = aes(x = filter.data$filter), fill = "#2b8cbe") +
       ggtitle("Filter Statistics") +
       labs(x="Filter Name", y="# of Times Filter is Used") 
+    filter.graph <- ggplotly(filter, width = 700)
+    filter.graph
     
   })
   
