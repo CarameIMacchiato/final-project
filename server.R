@@ -154,18 +154,7 @@ server <- function(input, output) {
     
     m  # Print the map
   })
-  
-<<<<<<< HEAD
-  # Recent picture of user for background
-  output$last.image <- renderUI({
-    last.pic <- recent.media()
-    last.pic <- flatten(last.pic)
-    last.pic <- slice(last.pic, 1) 
-    src = last.pic$images.standard_resolution.url
-    tags$img(src = src)
-  })
 
-=======
   #for the bar chart about likes in each picture
   output$bar_chart <- renderPlotly({
     media.result <- recent.media()
@@ -191,7 +180,6 @@ server <- function(input, output) {
       x
     }
   })
->>>>>>> master
 }
 
 shinyServer(server)
