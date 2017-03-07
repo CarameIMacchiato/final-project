@@ -6,20 +6,30 @@ library(dplyr)
 # Defining the UI
 ui <- fluidPage(theme = "bootstrap.css",
  
-  tags$div(h1("Self Worth Evaluator" ), class = "page-header"),
+  tags$div(h1("Self Worth Evaluator" ), class = "jumbotron", style = "background-image: url(http://static.tumblr.com/f13b0a6a22dd72346d930867ce349dff/zatppvx/DVQmt82k8/tumblr_static_colour-big.gif); background-size: cover"),
 
   column(4,
     
-    # Search for instagram user
+    # Search for first instagram user
     textInput("chosen.search", strong("Search Full Username")),
     p(em("Note: only works for our sandbox users", class = "text-info", class = "small")),
     
-    # Display profile
+    # Search for second instagram user
+    textInput("chosen.search.2", strong("Search Full Username")),
+
+    # Display profile for first user
     tags$div(h4(uiOutput('pic', class = "img-thumbnail"), textOutput("selected.user", inline = TRUE)),
     p(strong("Following: "), textOutput("following", inline = TRUE), strong("Followers: "), textOutput("follows", inline = TRUE),
     strong("Media Count: "), textOutput("media.count", inline = TRUE)),
     p(strong("Name: "), textOutput("name", inline = TRUE)),
-    p(strong("Bio: "), textOutput("bio", inline = TRUE)), class = "well")
+    p(strong("Bio: "), textOutput("bio", inline = TRUE)), class = "well"),
+    
+    # Display profile for second user
+    tags$div(h4(uiOutput('pic.2', class = "img-thumbnail"), textOutput("selected.user.2", inline = TRUE)),
+    p(strong("Following: "), textOutput("following.2", inline = TRUE), strong("Followers: "), textOutput("follows.2", inline = TRUE),
+    strong("Media Count: "), textOutput("media.count.2", inline = TRUE)),
+    p(strong("Name: "), textOutput("name.2", inline = TRUE)),
+    p(strong("Bio: "), textOutput("bio.2", inline = TRUE)), class = "well")
     
   ),
   
@@ -39,13 +49,14 @@ ui <- fluidPage(theme = "bootstrap.css",
                h4("The Filter Data"),
                p("This graph shows which filters the user uses the most, which can say a lot about wht kind of photos they take")
                ),
-      tabPanel("Map", leafletOutput('maps')),
+      tabPanel("Map", leafletOutput('maps'), leafletOutput('maps.2')),
       tabPanel("Image Data", plotlyOutput("bar_chart"), hr(), 
-               uiOutput("click")),
+               uiOutput("click"), plotlyOutput("bar_chart.2"), hr(), uiOutput("click.2")),
       tabPanel("Statistics",
                h2("Statistics"),
                p("Filters are a big part of Instagram."),
                plotOutput("plot")),
+               plotOutput("plot.2"),
       tabPanel("Privacy Policy",
                h2("Privacy Policy"),
                p("This privacy policy has been compiled to better serve those who are concerned with how their 'Personally Identifiable Information' (PII) is being used online. PII, as described in US privacy law and information security, is information that can be used on its own or with other information to identify, contact, or locate a single person, or to identify an individual in context. Please read our privacy policy carefully to get a clear understanding of how we collect, use, protect or otherwise handle your Personally Identifiable Information in accordance with our website."),
@@ -110,7 +121,9 @@ ui <- fluidPage(theme = "bootstrap.css",
                p("Last Edited on 2017-03-01")
       )
     ), class = "well")
-  )
+  ),
+  
+  tags$footer(fluidRow("This is a footer!"))
    
 )
 
