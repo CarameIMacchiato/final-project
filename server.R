@@ -3,15 +3,16 @@ library(ggplot2)
 library(dplyr)
 library(httr)
 library(jsonlite)
+library(plotly)
 library(leaflet)
 # install.packages("leaflet")
+# install.packages("plotly)
 
 # Sourcing the file with the keys in it. Access key is 'access.token'
 source("keys.R")
 
 base.url <- "https://api.instagram.com/v1/"
 
-# example url is https://api.instagram.com/v1/users/self/?access_token=ACCESS-TOKEN
 # Format is base url / request / access key
 # In case : 6ff7a923483441ea8b19c9ecd8b23d5a
 
@@ -22,11 +23,8 @@ body <- fromJSON(content(response, "text"))
 search.response <- GET(paste0("https://api.instagram.com/v1/users/search?q=a", "&", access.token))
 search.body <- fromJSON(content(search.response, "text"))
 
-
-
-
 server <- function(input, output) {
-  
+
   # for general data on user (i.e. username, full name, user id, bio, etc.)
   general.data <- reactive({
     search.response <- GET(paste0("https://api.instagram.com/v1/users/search?q=", input$chosen.search, "&", access.token))
@@ -102,7 +100,7 @@ server <- function(input, output) {
       labs(x="Filter Name", y="# of Times Filter is Used", fill = "Filter Name") 
     
   })
-  
+
   # Username for profile page
   output$selected.user <- renderText({
     user.data <- general.data()
@@ -157,6 +155,7 @@ server <- function(input, output) {
     m  # Print the map
   })
   
+<<<<<<< HEAD
   # Recent picture of user for background
   output$last.image <- renderUI({
     last.pic <- recent.media()
@@ -166,6 +165,33 @@ server <- function(input, output) {
     tags$img(src = src)
   })
 
+=======
+  #for the bar chart about likes in each picture
+  output$bar_chart <- renderPlotly({
+    media.result <- recent.media()
+    media.result <- flatten(media.result)
+    media.result$number <- nrow(media.result):1
+    g <- ggplot(data = media.result, aes(x = number, y = likes.count, fill = comments.count)) +
+      geom_bar(stat = "identity") + labs(x = "Numbers of Pictures", y = ("LIKES"), fill = "Comments counts") 
+    g <- ggplotly(g)
+  })
+  
+  #the picture of each instagrame photo
+  output$click <- renderUI({
+    media.result <- recent.media()
+    media.result <- flatten(media.result)
+    bar <- event_data("plotly_click")
+    link <- media.result[bar$x, "images.low_resolution.url"]
+    x <- tags$img(src = link)
+    
+    if (is.null(bar)) {
+      "Click the bar for the Image!!!"
+    } else {
+      "Image: "
+      x
+    }
+  })
+>>>>>>> master
 }
 
 shinyServer(server)
