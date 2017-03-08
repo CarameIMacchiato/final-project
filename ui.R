@@ -6,8 +6,9 @@ library(shinydashboard)
 # Defining the UI
 ui <- fluidPage(theme = "bootstrap.css",
  
-  tags$div(h1("Self Worth Evaluator" ), class = "jumbotron", style = "background-image: url(http://static.tumblr.com/f13b0a6a22dd72346d930867ce349dff/zatppvx/DVQmt82k8/tumblr_static_colour-big.gif); background-size: cover"),
   
+  tags$div(h1("InStatistics" ), class = "jumbotron", style = "background-image: url(http://static.tumblr.com/f13b0a6a22dd72346d930867ce349dff/zatppvx/DVQmt82k8/tumblr_static_colour-big.gif); background-size: cover"),
+
   h2("What is It?"),
   p("The Self-Worth Evaluator is an application that uses the instagram API to gather information and statistics on individual instagram users. It has many different features that tells a lot about a user, how they use instagram, and much more"),
   
@@ -16,7 +17,7 @@ ui <- fluidPage(theme = "bootstrap.css",
   dashboardBody(  
     fluidRow(
         tabBox(
-          title = icon("gear"), "Feature Info",
+          title = "Feature Info",
           tabPanel("Map",
                    "Infoinfoinfoinfo"
                    )
@@ -37,30 +38,57 @@ ui <- fluidPage(theme = "bootstrap.css",
         p(strong("Following: "), textOutput("following", inline = TRUE), strong("Followers: "), textOutput("follows", inline = TRUE),
         strong("Media Count: "), textOutput("media.count", inline = TRUE)),
         p(strong("Name: "), textOutput("name", inline = TRUE)),
-        p(strong("Bio: "), textOutput("bio", inline = TRUE)), class = "well")
+        p(strong("Bio: "), textOutput("bio", inline = TRUE)), class = "well"),
+        p(strong("List of valid usernames to search:")),
+        p("accelgor"),
+        p("squiwardtennisballs324"),
+        p("monmon_hi"),
+        p("onaregul_r"),
+        p("trickynicky71")
       ),
       
       column(3,
              tags$div(tabsetPanel(type = "tabs",
-                tabPanel("Map", leafletOutput('maps')),
-                tabPanel("Image Data", plotlyOutput("bar_chart"), hr(), 
-                         uiOutput("click")),
-                tabPanel("Statistics",
-                         h2("Statistics"),
-                         p("Filters are a big part of Instagram."),
-                         plotOutput("plot"))
+                tabPanel("Map", 
+                         h2("Mapped Data"),
+                         p("Here you can see on a map where exactly your posts are, this can be a great way to see trips from a vacation or where specifically you post the most."),
+                         leafletOutput('maps'),
+                         p(""),
+                         leafletOutput('maps.2')),
+                tabPanel("Image Data", 
+                         p("Here you can see a graph of how many likes and comments a users photos get"),
+                         plotlyOutput("bar_chart"), hr(), 
+                         uiOutput("click"), plotlyOutput("bar_chart.2"), hr(), uiOutput("click.2")),
+                tabPanel("Filter Use Data",
+                         h2("Filter Use Data"),
+                         p("Filters are a big part of what differentiates instagram from other social networks. Here is a graph of the user's filters, and how often they use each of them (if at all).
+                           You can use this data to see which filters are more popular to use than others, and compare your filter use to other people!"),
+                         plotlyOutput("plot"),
+                         p(""),
+                         plotlyOutput("plot.2"))
          ), class = "well")
       ),
         
       column(3,
              tags$div(tabsetPanel(type = "tabs",
-                tabPanel("Map", leafletOutput('maps.2')),
-                tabPanel("Image Data", plotlyOutput("bar_chart.2"), hr(), uiOutput("click.2")),
-                tabPanel("Statistics",
-                         h2("Statistics"),
-                         p("Filters are a big part of Instagram."),
-                        plotOutput("plot.2"))
-             ), class = "well")
+                tabPanel("Map", 
+                         h2("Mapped Data"),
+                         p("Here you can see on a map where exactly your posts are, this can be a great way to see trips from a vacation or where specifically you post the most."),
+                         leafletOutput('maps'),
+                         p(""),
+                         leafletOutput('maps.2')),
+                tabPanel("Image Data", 
+                         p("Here you can see a graph of how many likes and comments a users photos get"),
+                         plotlyOutput("bar_chart"), hr(), 
+                         uiOutput("click"), plotlyOutput("bar_chart.2"), hr(), uiOutput("click.2")),
+                tabPanel("Filter Use Data",
+                         h2("Filter Use Data"),
+                         p("Filters are a big part of what differentiates instagram from other social networks. Here is a graph of the user's filters, and how often they use each of them (if at all).
+                           You can use this data to see which filters are more popular to use than others, and compare your filter use to other people!"),
+                         plotlyOutput("plot"),
+                         p(""),
+                         plotlyOutput("plot.2"))
+                ), class = "well")
       ),
       
       column(3,
@@ -74,7 +102,7 @@ ui <- fluidPage(theme = "bootstrap.css",
         strong("Media Count: "), textOutput("media.count.2", inline = TRUE)),
         p(strong("Name: "), textOutput("name.2", inline = TRUE)),
         p(strong("Bio: "), textOutput("bio.2", inline = TRUE)), class = "well")
-        
+    
       )
     )
   )

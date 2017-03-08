@@ -23,6 +23,7 @@ body <- fromJSON(content(response, "text"))
 search.response <- GET(paste0("https://api.instagram.com/v1/users/search?q=a", "&", access.token))
 search.body <- fromJSON(content(search.response, "text"))
 
+
 server <- function(input, output) {
   
   ## General data for first user
@@ -48,6 +49,11 @@ server <- function(input, output) {
   general.data.2 <- reactive({
     search.response <- GET(paste0("https://api.instagram.com/v1/users/search?q=", input$chosen.search.2, "&", access.token))
     search.body <- fromJSON(content(search.response, "text"))
+    
+    if(length(search.body$data) == 0){
+      search.response <- GET(paste0("https://api.instagram.com/v1/users/search?q=onaregul", "&", access.token))
+      search.body <- fromJSON(content(search.response, "text"))
+    }
     
     # gets data of searched user
     data <- search.body$data
@@ -81,6 +87,11 @@ server <- function(input, output) {
   recent.media.2 <- reactive({
     search.response <- GET(paste0("https://api.instagram.com/v1/users/search?q=", input$chosen.search.2, "&", access.token))
     search.body <- fromJSON(content(search.response, "text"))
+    
+    if(length(search.body$data) == 0){
+      search.response <- GET(paste0("https://api.instagram.com/v1/users/search?q=onaregul", "&", access.token))
+      search.body <- fromJSON(content(search.response, "text"))
+    }
     
     # gets data of searched user
     data <- search.body$data
@@ -121,6 +132,11 @@ server <- function(input, output) {
     search.response <- GET(paste0("https://api.instagram.com/v1/users/search?q=", input$chosen.search.2, "&", access.token))
     search.body <- fromJSON(content(search.response, "text"))
     
+    if(length(search.body$data) == 0){
+      search.response <- GET(paste0("https://api.instagram.com/v1/users/search?q=onaregul", "&", access.token))
+      search.body <- fromJSON(content(search.response, "text"))
+    }
+    
     # gets data of searched user
     data <- search.body$data
     user.id <- data$id
@@ -146,7 +162,6 @@ server <- function(input, output) {
     return(map.info)
   })
   
-  
   ## Map data for the second user
   
   map.stuff.2 <- reactive({
@@ -162,23 +177,30 @@ server <- function(input, output) {
   
   
   # Creation of filter plot for the first user. 
-  output$plot <- renderPlot({
+  output$plot <- renderPlotly({
     filter.data <- recent.media()
-    ggplot(data = filter.data) +
-      geom_bar(mapping = aes(x = filter.data$filter, fill = filter.data$filter)) +
+    data.filter <- flatten(filter.data) %>% 
+                    select(filter) 
+    colnames(data.filter) <- c("Filter")
+    filter <- ggplot(data = data.filter) +
+      geom_bar(mapping = aes(x = Filter), fill = "#2b8cbe") +
       ggtitle("Filter Statistics") +
-      labs(x="Filter Name", y="# of Times Filter is Used", fill = "Filter Name") 
-    
+      labs(x="Filter Name", y="# of Times Filter is Used") 
+    filter.graph <- ggplotly(filter, width = 700, tooltip = c("x", "y"))
   })
   
   
   # Creation of filter plot for the second user. 
-  output$plot.2 <- renderPlot({
+  output$plot.2 <- renderPlotly({
     filter.data <- recent.media.2()
-    ggplot(data = filter.data) +
-      geom_bar(mapping = aes(x = filter.data$filter, fill = filter.data$filter)) +
+    data.filter <- flatten(filter.data) %>% 
+      select(filter) 
+    colnames(data.filter) <- c("Filter")
+    filter <- ggplot(data = data.filter) +
+      geom_bar(mapping = aes(x = Filter), fill = "#9ecae1") +
       ggtitle("Filter Statistics") +
-      labs(x="Filter Name", y="# of Times Filter is Used", fill = "Filter Name") 
+      labs(x="Filter Name", y="# of Times Filter is Used") 
+    filter.graph <- ggplotly(filter, width = 700, tooltip = c("x", "y"))
     
   })
   
@@ -317,14 +339,14 @@ server <- function(input, output) {
       geom_bar(stat = "identity", color = "purple") + 
       labs(x = "Image #", y = ("LIKES"), fill = "Comments") +
       scale_x_discrete(limits = 1:nrow(media.result))
-    g <- ggplotly(g, width = 700, tooltip = c("x", "label", "label2", "label3")) 
+    g <- ggplotly(g, width = 700, tooltip = c("x", "label", "label2", "label3"), source = "user.1") 
   })
   
   # The picture of each instagram photo
   output$click <- renderUI({
     media.result <- recent.media()
     media.result <- flatten(media.result)
-    bar <- event_data("plotly_click")
+    bar <- event_data("plotly_click", source = "user.1")
     link <- media.result[bar$x, "images.low_resolution.url"]
 
     if (is.null(bar)) {
@@ -349,14 +371,14 @@ server <- function(input, output) {
       geom_bar(stat = "identity", color = "purple") + 
       labs(x = "Image #", y = ("LIKES"), fill = "Comments") +
       scale_x_discrete(limits = 1:nrow(media.result))
-    g <- ggplotly(g, width = 700, tooltip = c("x", "label", "label2", "label3")) 
+    g <- ggplotly(g, width = 700, tooltip = c("x", "label", "label2", "label3"), source = "user.2") 
   })
   
   # The picture of each instagram photo
   output$click.2 <- renderUI({
     media.result <- recent.media.2()
     media.result <- flatten(media.result)
-    bar <- event_data("plotly_click")
+    bar <- event_data("plotly_click", source = "user.2")
     link <- media.result[bar$x, "images.low_resolution.url"]
     
     if (is.null(bar)) {
@@ -368,4 +390,3 @@ server <- function(input, output) {
 }
 
 shinyServer(server)
-
