@@ -20,7 +20,7 @@ base.url <- "https://api.instagram.com/v1/"
 response <- GET(paste0(base.url, "users/self/?", access.token))
 body <- fromJSON(content(response, "text"))
 
-search.response <- GET(paste0("https://api.instagram.com/v1/users/search?q=a", "&", access.token))
+search.response <- GET(paste0("https://api.instagram.com/v1/users/search?q=abigail_oceanna", "&", access.token))
 search.body <- fromJSON(content(search.response, "text"))
 
 

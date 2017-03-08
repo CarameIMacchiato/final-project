@@ -62,6 +62,8 @@ ui <- fluidPage(theme = "bootstrap.css",
         p("monmon_hi"),
         p("onaregul_r"),
         p("trickynicky71"),
+        p("nikicruzz"),
+        p("abigail_oceanna BROKEN"),
         class = "table table-hover")
       ),
       
