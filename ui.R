@@ -24,22 +24,24 @@ ui <- fluidPage(theme = "bootstrap.css",
   
   dashboardBody(  
     fluidRow(
-        tabBox(
-          tabPanel("Map Info",
-                   h4("Map"),
-                   p("Here you can see on a map where exactly your posts are, this can be a great way to see trips from a vacation or where specifically you post the most.")
-                   ),
-          tabPanel("Image Data", 
-                   h4("Image Data"),
-                   p("Here you can see a graph of how many likes and comments a users photos get")
-                  ),
-          tabPanel("Filter Use Data",
-                   h4("Filter Use Data"),
-                   p("Filters are a big part of what differentiates instagram from other social networks. Here is a graph of the user's filters, and how often they use each of them (if at all).
-                     You can use this data to see which filters are more popular to use than others, and compare your filter use to other people!")
-                  )
-        )
+      column(12, align = "center", offset = 3,
+          tabBox(
+            tabPanel("Map Info",
+                     h4("Map"),
+                     p("Here you can see on a map where exactly your posts are, this can be a great way to see trips from a vacation or where specifically you post the most.")
+                     ),
+            tabPanel("Image Data", 
+                     h4("Image Data"),
+                     p("Here you can see a graph of how many likes and comments a users photos get")
+                    ),
+            tabPanel("Filter Use Data",
+                     h4("Filter Use Data"),
+                     p("Filters are a big part of what differentiates instagram from other social networks. Here is a graph of the user's filters, and how often they use each of them (if at all).
+                       You can use this data to see which filters are more popular to use than others, and compare your filter use to other people!")
+                    )
+          )
       )
+    )
   ),
   
   hr(),
