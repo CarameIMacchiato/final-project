@@ -162,7 +162,7 @@ server <- function(input, output) {
   
   
   # Creation of filter plot for the first user. 
-  output$plot <- renderPlot({
+  output$plot <- renderPlotly({
     filter.data <- recent.media()
     data.filter <- flatten(filter.data) %>% 
                     select(filter) 
@@ -172,22 +172,20 @@ server <- function(input, output) {
       ggtitle("Filter Statistics") +
       labs(x="Filter Name", y="# of Times Filter is Used") 
     filter.graph <- ggplotly(filter, width = 700, tooltip = c("x", "y"))
-    filter.graph
   })
   
   
   # Creation of filter plot for the second user. 
-  output$plot.2 <- renderPlot({
+  output$plot.2 <- renderPlotly({
     filter.data <- recent.media.2()
     data.filter <- flatten(filter.data) %>% 
       select(filter) 
     colnames(data.filter) <- c("Filter")
     filter <- ggplot(data = data.filter) +
-      geom_bar(mapping = aes(x = Filter), fill = "#fa9fb5") +
+      geom_bar(mapping = aes(x = Filter), fill = "#9ecae1") +
       ggtitle("Filter Statistics") +
       labs(x="Filter Name", y="# of Times Filter is Used") 
     filter.graph <- ggplotly(filter, width = 700, tooltip = c("x", "y"))
-    filter.graph
     
   })
   
