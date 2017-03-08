@@ -49,6 +49,11 @@ server <- function(input, output) {
     search.response <- GET(paste0("https://api.instagram.com/v1/users/search?q=", input$chosen.search.2, "&", access.token))
     search.body <- fromJSON(content(search.response, "text"))
     
+    if(length(search.body$data) == 0){
+      search.response <- GET(paste0("https://api.instagram.com/v1/users/search?q=onaregul", "&", access.token))
+      search.body <- fromJSON(content(search.response, "text"))
+    }
+    
     # gets data of searched user
     data <- search.body$data
     return(data)
@@ -81,6 +86,11 @@ server <- function(input, output) {
   recent.media.2 <- reactive({
     search.response <- GET(paste0("https://api.instagram.com/v1/users/search?q=", input$chosen.search.2, "&", access.token))
     search.body <- fromJSON(content(search.response, "text"))
+    
+    if(length(search.body$data) == 0){
+      search.response <- GET(paste0("https://api.instagram.com/v1/users/search?q=onaregul", "&", access.token))
+      search.body <- fromJSON(content(search.response, "text"))
+    }
     
     # gets data of searched user
     data <- search.body$data
@@ -120,6 +130,11 @@ server <- function(input, output) {
   specific.counts.2 <- reactive({
     search.response <- GET(paste0("https://api.instagram.com/v1/users/search?q=", input$chosen.search.2, "&", access.token))
     search.body <- fromJSON(content(search.response, "text"))
+    
+    if(length(search.body$data) == 0){
+      search.response <- GET(paste0("https://api.instagram.com/v1/users/search?q=onaregul", "&", access.token))
+      search.body <- fromJSON(content(search.response, "text"))
+    }
     
     # gets data of searched user
     data <- search.body$data
@@ -315,14 +330,14 @@ server <- function(input, output) {
       geom_bar(stat = "identity", color = "purple") + 
       labs(x = "Image #", y = ("LIKES"), fill = "Comments") +
       scale_x_discrete(limits = 1:nrow(media.result))
-    g <- ggplotly(g, width = 700, tooltip = c("x", "label", "label2", "label3")) 
+    g <- ggplotly(g, width = 700, tooltip = c("x", "label", "label2", "label3"), source = "user.1") 
   })
   
   # The picture of each instagram photo
   output$click <- renderUI({
     media.result <- recent.media()
     media.result <- flatten(media.result)
-    bar <- event_data("plotly_click")
+    bar <- event_data("plotly_click", source = "user.1")
     link <- media.result[bar$x, "images.low_resolution.url"]
 
     if (is.null(bar)) {
@@ -347,14 +362,14 @@ server <- function(input, output) {
       geom_bar(stat = "identity", color = "purple") + 
       labs(x = "Image #", y = ("LIKES"), fill = "Comments") +
       scale_x_discrete(limits = 1:nrow(media.result))
-    g <- ggplotly(g, width = 700, tooltip = c("x", "label", "label2", "label3")) 
+    g <- ggplotly(g, width = 700, tooltip = c("x", "label", "label2", "label3"), source = "user.2") 
   })
   
   # The picture of each instagram photo
   output$click.2 <- renderUI({
     media.result <- recent.media.2()
     media.result <- flatten(media.result)
-    bar <- event_data("plotly_click")
+    bar <- event_data("plotly_click", source = "user.2")
     link <- media.result[bar$x, "images.low_resolution.url"]
     
     if (is.null(bar)) {
