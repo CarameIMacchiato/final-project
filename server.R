@@ -280,6 +280,8 @@ server <- function(input, output) {
     tags$img(src = src)
   })
   
+  
+  
   ## Map for first user
   
   # Creation of maps with leaflet
