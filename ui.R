@@ -8,12 +8,13 @@ ui <- fluidPage(theme = "bootstrap.css",
  
   tags$div(h1("InStatistics" ), class = "jumbotron", style = "background-image: url(http://static.tumblr.com/f13b0a6a22dd72346d930867ce349dff/zatppvx/DVQmt82k8/tumblr_static_colour-big.gif); background-size: cover"),
 
+  p(em("Note: only works for our sandbox users", class = "text-info", class = "small")),
+  
   fluidRow(
       column(3,
         
         # Search for first instagram user
         textInput("chosen.search", strong("First User")),
-        p(em("Note: only works for our sandbox users", class = "text-info", class = "small")),
     
         # Display profile for first user
         tags$div(h4(uiOutput('pic', class = "img-thumbnail"), textOutput("selected.user", inline = TRUE)),
@@ -57,10 +58,12 @@ ui <- fluidPage(theme = "bootstrap.css",
                                            uiOutput("click"), plotlyOutput("bar_chart.2"), hr(), uiOutput("click.2")),
                                   tabPanel("Filter Use Data",
                                            h2("Filter Use Data"),
-                                           p("Filters are a big part of what differentiates instagram from other social networks. Here you can see the usage statistics of filters by a user."),
-                                           plotOutput("plot"),
+                                           p("Filters are a big part of what differentiates instagram from other social networks. Here is a graph of the user's filters, and how often they use each of them (if at all).
+                                             You can use this data to see which filters are more popular to use than others, and compare your filter use to other people!"),
+                                           plotlyOutput("plot"),
                                            p(""),
-                                           plotOutput("plot.2"))
+                                           plotlyOutput("plot.2"))
+
          ), class = "well")
       ),
         
@@ -75,7 +78,7 @@ ui <- fluidPage(theme = "bootstrap.css",
         strong("Media Count: "), textOutput("media.count.2", inline = TRUE)),
         p(strong("Name: "), textOutput("name.2", inline = TRUE)),
         p(strong("Bio: "), textOutput("bio.2", inline = TRUE)), class = "well")
-        
+    
       )
     )
   )

@@ -23,6 +23,7 @@ body <- fromJSON(content(response, "text"))
 search.response <- GET(paste0("https://api.instagram.com/v1/users/search?q=a", "&", access.token))
 search.body <- fromJSON(content(search.response, "text"))
 
+
 server <- function(input, output) {
   
   ## General data for first user
@@ -161,7 +162,6 @@ server <- function(input, output) {
     return(map.info)
   })
   
-  
   ## Map data for the second user
   
   map.stuff.2 <- reactive({
@@ -177,23 +177,30 @@ server <- function(input, output) {
   
   
   # Creation of filter plot for the first user. 
-  output$plot <- renderPlot({
+  output$plot <- renderPlotly({
     filter.data <- recent.media()
-    ggplot(data = filter.data) +
-      geom_bar(mapping = aes(x = filter.data$filter, fill = filter.data$filter)) +
+    data.filter <- flatten(filter.data) %>% 
+                    select(filter) 
+    colnames(data.filter) <- c("Filter")
+    filter <- ggplot(data = data.filter) +
+      geom_bar(mapping = aes(x = Filter), fill = "#2b8cbe") +
       ggtitle("Filter Statistics") +
-      labs(x="Filter Name", y="# of Times Filter is Used", fill = "Filter Name") 
-    
+      labs(x="Filter Name", y="# of Times Filter is Used") 
+    filter.graph <- ggplotly(filter, width = 700, tooltip = c("x", "y"))
   })
   
   
   # Creation of filter plot for the second user. 
-  output$plot.2 <- renderPlot({
+  output$plot.2 <- renderPlotly({
     filter.data <- recent.media.2()
-    ggplot(data = filter.data) +
-      geom_bar(mapping = aes(x = filter.data$filter, fill = filter.data$filter)) +
+    data.filter <- flatten(filter.data) %>% 
+      select(filter) 
+    colnames(data.filter) <- c("Filter")
+    filter <- ggplot(data = data.filter) +
+      geom_bar(mapping = aes(x = Filter), fill = "#9ecae1") +
       ggtitle("Filter Statistics") +
-      labs(x="Filter Name", y="# of Times Filter is Used", fill = "Filter Name") 
+      labs(x="Filter Name", y="# of Times Filter is Used") 
+    filter.graph <- ggplotly(filter, width = 700, tooltip = c("x", "y"))
     
   })
   
@@ -288,6 +295,8 @@ server <- function(input, output) {
     tags$img(src = src)
   })
   
+  
+  
   ## Map for first user
   
   # Creation of maps with leaflet
@@ -381,4 +390,3 @@ server <- function(input, output) {
 }
 
 shinyServer(server)
-
