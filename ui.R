@@ -39,6 +39,7 @@ ui <- fluidPage(theme = "bootstrap.css",
         strong("Media Count: "), textOutput("media.count", inline = TRUE)),
         p(strong("Name: "), textOutput("name", inline = TRUE)),
         p(strong("Bio: "), textOutput("bio", inline = TRUE)), class = "well"),
+        
         p(strong("List of valid usernames to search:")),
         p("accelgor"),
         p("squiwardtennisballs324"),

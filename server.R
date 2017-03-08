@@ -387,6 +387,7 @@ server <- function(input, output) {
       tags$img(src = link)
     }
   })
+  
 }
 
 shinyServer(server)
