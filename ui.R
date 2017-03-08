@@ -9,29 +9,46 @@ ui <- fluidPage(theme = "bootstrap.css",
   
   tags$div(h1("InStatistics" ), class = "jumbotron", style = "background-image: url(http://static.tumblr.com/f13b0a6a22dd72346d930867ce349dff/zatppvx/DVQmt82k8/tumblr_static_colour-big.gif); background-size: cover"),
 
-  h2("What is It?"),
-  p("The Self-Worth Evaluator is an application that uses the instagram API to gather information and statistics on individual instagram users. It has many different features that tells a lot about a user, how they use instagram, and much more"),
+  h3("What is It?"),
+  p("This is an application that uses the instagram API to gather information and statistics on individual instagram users. It has many different features that tells a lot about a user, how they use instagram, and much more"),
   
   p(em("Note: only works for our sandbox users", class = "text-info", class = "small")),
+  
+  h5("Search Bars"),
+  p("The search bar can be used to look up different Instagram users, but is limited to only a few due to instagram's API restrictions on public content. Look up a username and the app finds out all their information."),
+  
+  h5("The Profile Info"),
+  p("Under the search bar, you can see a users miniature profile page, which includes their profile picture, follower information, and post information"),
+  
+  hr(),
   
   dashboardBody(  
     fluidRow(
         tabBox(
-          title = "Feature Info",
-          tabPanel("Map",
-                   "Infoinfoinfoinfo"
-                   )
+          tabPanel("Map Info",
+                   h4("Map"),
+                   p("Here you can see on a map where exactly your posts are, this can be a great way to see trips from a vacation or where specifically you post the most.")
+                   ),
+          tabPanel("Image Data", 
+                   h4("Image Data"),
+                   p("Here you can see a graph of how many likes and comments a users photos get")
+                  ),
+          tabPanel("Filter Use Data",
+                   h4("Filter Use Data"),
+                   p("Filters are a big part of what differentiates instagram from other social networks. Here is a graph of the user's filters, and how often they use each of them (if at all).
+                     You can use this data to see which filters are more popular to use than others, and compare your filter use to other people!")
+                  )
         )
       )
   ),
   
-  br(),
+  hr(),
   
   fluidRow(
       column(3,
         
         # Search for first instagram user
-        textInput("chosen.search", strong("First User")),
+        textInput("chosen.search", h4("First User"), placeholder = "Type username here"),
     
         # Display profile for first user
         tags$div(h4(uiOutput('pic', class = "img-thumbnail"), textOutput("selected.user", inline = TRUE)),
@@ -50,34 +67,22 @@ ui <- fluidPage(theme = "bootstrap.css",
       
       column(3,
              tags$div(tabsetPanel(type = "tabs",
-                                  tabPanel("Map", 
-                                           h2("Mapped Data"),
-                                           p("Here you can see on a map where exactly your posts are, this can be a great way to see trips from a vacation or where specifically you post the most."),
-                                           leafletOutput('maps')),
-                                  tabPanel("Image Data", 
-                                           p("Here you can see a graph of how many likes and comments a users photos get"),
-                                           plotlyOutput("bar_chart"), hr(), uiOutput("click")),
-                                  tabPanel("Filter Use Data",
-                                           h2("Filter Use Data"),
-                                           p("Filters are a big part of what differentiates instagram from other social networks. Here is a graph of the user's filters, and how often they use each of them (if at all).
-                                             You can use this data to see which filters are more popular to use than others, and compare your filter use to other people!"),
-                                           plotlyOutput("plot"))
-                                  ), class = "well")
+                tabPanel("Map", 
+                         leafletOutput('maps')),
+                tabPanel("Image Data",
+                         plotlyOutput("bar_chart"), hr(), uiOutput("click")),
+                tabPanel("Filter Use Data",
+                         plotlyOutput("plot"))
+                ), class = "well")
       ),
         
       column(3,
              tags$div(tabsetPanel(type = "tabs",
                 tabPanel("Map", 
-                         h2("Mapped Data"),
-                         p("Here you can see on a map where exactly your posts are, this can be a great way to see trips from a vacation or where specifically you post the most."),
                          leafletOutput('maps.2')),
                 tabPanel("Image Data", 
-                         p("Here you can see a graph of how many likes and comments a users photos get"),
                          plotlyOutput("bar_chart.2"), hr(), uiOutput("click.2")),
                 tabPanel("Filter Use Data",
-                         h2("Filter Use Data"),
-                         p("Filters are a big part of what differentiates instagram from other social networks. Here is a graph of the user's filters, and how often they use each of them (if at all).
-                           You can use this data to see which filters are more popular to use than others, and compare your filter use to other people!"),
                          plotlyOutput("plot.2"))
                 ), class = "well")
       ),
@@ -85,7 +90,7 @@ ui <- fluidPage(theme = "bootstrap.css",
       column(3,
              
         # Search for second instagram user
-        textInput("chosen.search.2", strong("Second User")),
+        textInput("chosen.search.2", h4("Second User"), placeholder = "Type username here"),
         
         # Display profile for second user
         tags$div(h4(uiOutput('pic.2', class = "img-thumbnail"), textOutput("selected.user.2", inline = TRUE)),
