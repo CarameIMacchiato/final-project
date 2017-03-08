@@ -1,14 +1,30 @@
 library(shiny)
 library(ggplot2)
 library(dplyr)
-
+library(shinydashboard)
 
 # Defining the UI
 ui <- fluidPage(theme = "bootstrap.css",
  
   tags$div(h1("Self Worth Evaluator" ), class = "jumbotron", style = "background-image: url(http://static.tumblr.com/f13b0a6a22dd72346d930867ce349dff/zatppvx/DVQmt82k8/tumblr_static_colour-big.gif); background-size: cover"),
   
+  h2("What is It?"),
+  p("The Self-Worth Evaluator is an application that uses the instagram API to gather information and statistics on individual instagram users. It has many different features that tells a lot about a user, how they use instagram, and much more"),
+  
   p(em("Note: only works for our sandbox users", class = "text-info", class = "small")),
+  
+  dashboardBody(  
+    fluidRow(
+        tabBox(
+          title = icon("gear"), "Feature Info",
+          tabPanel("Map",
+                   "Infoinfoinfoinfo"
+                   )
+        )
+      )
+  ),
+  
+  br(),
   
   fluidRow(
       column(3,
@@ -24,32 +40,29 @@ ui <- fluidPage(theme = "bootstrap.css",
         p(strong("Bio: "), textOutput("bio", inline = TRUE)), class = "well")
       ),
       
-      column(6,
+      column(3,
              tags$div(tabsetPanel(type = "tabs",
-                tabPanel("Explanation",
-                         h2("What is It?"),
-                         p("The Self-Worth Evaluator is an application that uses the instagram API to gather information and statistics on individual instagram users. It has many different features that tells a lot about a user, how they use instagram, and much more"),
-                         h4("Search Bar"),
-                         p("The search bar can be used to look up different Instagram users, but is limited to only a few due to instagram's API restrictions on public content. Look up a username and the app finds out all their information"),
-                         h4("The Profile Info"),
-                         p("Under the search bar, you can see a users miniature profile page, which includes their profile picture, follower information, and post information"),
-                         h4("The Photo Map"),
-                         p("This map displays all the different places pictures were posted, along with the actual pictures and captions"),
-                         h4("The Image Data"),
-                         p("This graph shows the amount of likes each photo has and shows in color how many comments it has, and can be clicked to display the image"),
-                         h4("The Filter Data"),
-                         p("This graph shows which filters the user uses the most, which can say a lot about wht kind of photos they take")
-                ),
-                tabPanel("Map", leafletOutput('maps'), leafletOutput('maps.2')),
+                tabPanel("Map", leafletOutput('maps')),
                 tabPanel("Image Data", plotlyOutput("bar_chart"), hr(), 
-                         uiOutput("click"), plotlyOutput("bar_chart.2"), hr(), uiOutput("click.2")),
+                         uiOutput("click")),
                 tabPanel("Statistics",
                          h2("Statistics"),
                          p("Filters are a big part of Instagram."),
-                         plotOutput("plot"), plotOutput("plot.2"))
+                         plotOutput("plot"))
          ), class = "well")
       ),
         
+      column(3,
+             tags$div(tabsetPanel(type = "tabs",
+                tabPanel("Map", leafletOutput('maps.2')),
+                tabPanel("Image Data", plotlyOutput("bar_chart.2"), hr(), uiOutput("click.2")),
+                tabPanel("Statistics",
+                         h2("Statistics"),
+                         p("Filters are a big part of Instagram."),
+                        plotOutput("plot.2"))
+             ), class = "well")
+      ),
+      
       column(3,
              
         # Search for second instagram user
