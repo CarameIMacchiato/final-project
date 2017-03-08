@@ -25,7 +25,7 @@ search.body <- fromJSON(content(search.response, "text"))
 
 media.response <- GET(paste0(base.url, "users/self/media/recent/?", access.token))
 media.body <- fromJSON(content(media.response, "text"))
-media.result <- flatten(media.body$data)
+media.result <- flatten(media.body$data) 
 
 server <- function(input, output) {
   
@@ -94,17 +94,18 @@ server <- function(input, output) {
     return(map.info)
   })
   
-  
   # plot of filters
   output$filter_plot <- renderPlotly({
     filter.data <- recent.media()
-    filter <- ggplot(data = filter.data) +
-      geom_bar(mapping = aes(x = filter.data$filter), fill = "#2b8cbe") +
+    data.filter <- flatten(filter.data) %>% 
+                    select(filter, likes.count) 
+    colnames(data.filter) <- c("Filter", "Likes")
+    filter <- ggplot(data = data.filter, label = Likes) +
+      geom_bar(mapping = aes(x = Filter), fill = "#2b8cbe") +
       ggtitle("Filter Statistics") +
       labs(x="Filter Name", y="# of Times Filter is Used") 
-    filter.graph <- ggplotly(filter, width = 700)
+    filter.graph <- ggplotly(filter, width = 700, tooltip = c("x", "y", "label"))
     filter.graph
-    
   })
   
   # Username for profile page
