@@ -38,16 +38,14 @@ ui <- fluidPage(theme = "bootstrap.css",
                                            h4("The Image Data"),
                                            p("This graph shows the amount of likes each photo has and shows in color how many comments it has, and can be clicked to display the image"),
                                            h4("The Filter Data"),
-                                           p("This graph shows which filters the user uses the most, which can say a lot about wht kind of photos they take")
+                                           p("Filters are a big part of Instagram. Here is a graph of the user's filters, and how often they use each of them (if at all).
+                                             You can use this data to see which filters are more popular to use than others, and compare your filter use to other people!")
                                   ),
                                   tabPanel("Map", leafletOutput('maps'), leafletOutput('maps.2')),
                                   tabPanel("Image Data", plotlyOutput("bar_chart"), hr(), 
                                            uiOutput("click"), plotlyOutput("bar_chart.2"), hr(), uiOutput("click.2")),
                                   tabPanel("Statistics",
-                                           h2("Filters"),
-                                           p("Filters are a big part of Instagram. Here is a graph of the user's filters, and how often they use each of them (if at all).
-                                             You can use this data to see which filters are more popular to use than others, and compare your filter use to other people!"),
-                                           plotlyOutput("plot"), plotlyOutput("plot.2"))
+                                           plotlyOutput("plot"), hr(), plotlyOutput("plot.2"))
 
          ), class = "well")
       ),
