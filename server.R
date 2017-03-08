@@ -23,10 +23,6 @@ body <- fromJSON(content(response, "text"))
 search.response <- GET(paste0("https://api.instagram.com/v1/users/search?q=a", "&", access.token))
 search.body <- fromJSON(content(search.response, "text"))
 
-media.response <- GET(paste0(base.url, "users/self/media/recent/?", access.token))
-media.body <- fromJSON(content(media.response, "text"))
-media.result <- flatten(media.body$data)
-
 server <- function(input, output) {
   
   # for general data on user (i.e. username, full name, user id, bio, etc.)
@@ -164,6 +160,7 @@ server <- function(input, output) {
   output$bar_chart <- renderPlotly({
     media.result <- recent.media()
     media.result <- flatten(media.result)
+    media.result <- filter(media.result, likes.count > 0)
     media.result <- select(media.result, created_time, likes.count, comments.count, images.low_resolution.url)
     media.result$number <- nrow(media.result):1
     media.result$created_time <- as.POSIXct(as.numeric(media.result$created_time), origin = "1970-01-01")
@@ -174,6 +171,7 @@ server <- function(input, output) {
       scale_x_discrete(limits = 1:nrow(media.result))
     g <- ggplotly(g, width = 700, tooltip = c("x", "label", "label2", "label3")) 
   })
+  
   #the picture of each instagrame photo
   output$click <- renderUI({
     media.result <- recent.media()
