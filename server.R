@@ -6,7 +6,7 @@ library(jsonlite)
 library(plotly)
 library(leaflet)
 # install.packages("leaflet")
-# install.packages("plotly)
+# install.packages("plotly")
 
 # Sourcing the file with the keys in it. Access key is 'access.token'
 source("keys.R")
