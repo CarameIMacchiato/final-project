@@ -27,10 +27,7 @@ ui <- fluidPage(theme = "bootstrap.css",
   dashboardBody(  
     fluidRow(
       column(12, align = "center", offset = 3,
-          tabBox(
-            tabPanel(
-              tags$span(style = "color:white", "A string for space")
-            ),
+          tags$div(tabBox(
             tabPanel("Map Info",
                      h4("Map"),
                      p("Here you can see on a map where exactly your posts are, this can be a great way to see trips from a vacation or where specifically you post the most.")
@@ -44,10 +41,7 @@ ui <- fluidPage(theme = "bootstrap.css",
                      p("Filters are a big part of what differentiates instagram from other social networks. Here is a graph of the user's filters, and how often they use each of them (if at all).
                        You can use this data to see which filters are more popular to use than others, and compare your filter use to other people!")
             ),
-            tabPanel(
-              tags$span(style = "color:white", "A string for space")
-            ),
-          selected = "Map Info")
+          selected = "Map Info"), id = "centeredmenu")
       )
     )
   ),
