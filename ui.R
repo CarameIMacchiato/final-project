@@ -10,7 +10,7 @@ ui <- fluidPage(theme = "bootstrap.css",
   
   tags$div(h1("InStatistics" ), class = "jumbotron", style = "background-image: url(http://static.tumblr.com/f13b0a6a22dd72346d930867ce349dff/zatppvx/DVQmt82k8/tumblr_static_colour-big.gif); background-size: cover"),
 
-  h3("What is It?"),
+  tags$div(h3("What is It?"),
   p("This is an application that uses the instagram API to gather information and statistics on individual instagram users. It has many different features that tells a lot about a user, how they use instagram, and much more"),
   
   p(em("Note: only works for our sandbox users", class = "text-info", class = "small")),
@@ -20,6 +20,7 @@ ui <- fluidPage(theme = "bootstrap.css",
   
   h5("The Profile Info"),
   p("Under the search bar, you can see a users miniature profile page, which includes their profile picture, follower information, and post information"),
+  align = "center"),
   
   hr(),
   
