@@ -10,15 +10,15 @@ ui <- fluidPage(theme = "bootstrap.css",
   tags$div(h1("InStatistics" ), class = "jumbotron", style = "background-image: url(http://static.tumblr.com/f13b0a6a22dd72346d930867ce349dff/zatppvx/DVQmt82k8/tumblr_static_colour-big.gif); background-size: cover"),
 
   h3("What is It?"),
-  p("This is an application that uses the instagram API to gather information and statistics on individual instagram users. It has many different features that tells a lot about a user, how they use instagram, and much more"),
+  p("This is an application that uses the instagram API to gather information and statistics on individual instagram users. It has many different features that tells a lot about different users, how they use instagram, and much more. It can tell you where you've been through the map, how many likes and comments you receive, and how you use filters. It shows the data for two different users, so you can compare how you use your instagram to a friend."),
   
-  p(em("Note: only works for our sandbox users", class = "text-info", class = "small")),
+  p(em("Note: only works for our sandbox users due to API restrictions", class = "text-info", class = "small")),
   
   h5("Search Bars"),
   p("The search bar can be used to look up different Instagram users, but is limited to only a few due to instagram's API restrictions on public content. Look up a username and the app finds out all their information."),
   
   h5("The Profile Info"),
-  p("Under the search bar, you can see a users miniature profile page, which includes their profile picture, follower information, and post information"),
+  p("Under the search bar, you can see a users miniature profile page, which includes their profile picture, follower information, and post information."),
   
   hr(),
   
@@ -26,11 +26,11 @@ ui <- fluidPage(theme = "bootstrap.css",
       tabBox(
         tabPanel("Map Info",
                  h4("Map"),
-                 p("Here you can see on a map where exactly your posts are, this can be a great way to see trips from a vacation or where specifically you post the most.")
+                 p("Here you can see on a map where exactly your posts are, this can be a great way to see trips from a vacation or where specifically you post the most. Click on a pin and a popup with the photo and description will appear.")
                  ),
         tabPanel("Image Data", 
                  h4("Image Data"),
-                 p("Here you can see a graph of how many likes and comments a users photos get")
+                 p("Here you can see a graph of how many likes and comments a users photos get on images. You can click on a bar to see the specific photo that the specific bar is describing.")
                 ),
         tabPanel("Filter Use Data",
                  h4("Filter Use Data"),
