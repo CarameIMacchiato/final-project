@@ -45,6 +45,10 @@ ui <- fluidPage(theme = "bootstrap.css",
                      p("Filters are a big part of what differentiates instagram from other social networks. Here is a graph of the user's filters, and how often they use each of them, if at all.
                        You can use this data to see which filters are more popular to use than others, and compare your filter use to other people!")
             ),
+            tabPanel("Why Use the App?",
+                     h5("Reasons to Compare"),
+                     p("things here.")
+            ),
           selected = "Map Info")
       )
     )
