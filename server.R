@@ -188,7 +188,8 @@ server <- function(input, output) {
       geom_bar(mapping = aes(x = Filter), fill = "#2b8cbe") +
       ggtitle("Filter Statistics") +
       labs(x="Filter Name", y="# of Times Filter is Used") 
-    filter.graph <- ggplotly(filter, width = 700, tooltip = c("x", "y"))
+    filter.graph <- ggplotly(filter, width = 700, tooltip = c("x", "y")) %>%
+      layout(xaxis = list(showticklabels = FALSE))
   })
   
   
@@ -201,8 +202,9 @@ server <- function(input, output) {
     filter <- ggplot(data = data.filter) +
       geom_bar(mapping = aes(x = Filter), fill = "#9ecae1") +
       ggtitle("Filter Statistics") +
-      labs(x="Filter Name", y="# of Times Filter is Used") 
-    filter.graph <- ggplotly(filter, width = 700, tooltip = c("x", "y"))
+      labs(x="Filter Name", y="# of Times Filter is Used")
+    filter.graph <- ggplotly(filter, width = 700, tooltip = c("x", "y")) %>%
+      layout(xaxis = list(showticklabels = FALSE))
     
   })
   

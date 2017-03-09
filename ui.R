@@ -41,12 +41,12 @@ ui <- fluidPage(theme = "bootstrap.css",
             tabPanel("Image Data", 
                      h5("Graphed Image Data"),
                      p("This graph shows the amount of comments and likes that a user has gotten on their 20 most recent media. The y-axis is based on the amount of likes and the x-axis is the chronological order of the photos, with the most recent photo on the left."),
-                     p("The colors of each bar corresponds with the amount of comments each photo has gotten."),
-                     p("Each bar can be clicked to see the corresponding photo as well, and it will appear below the graph. Hovering over each bar also reveals extra information.")
+                     p("The colors of each bar corresponds with the amount of comments each photo has received."),
+                     p("Each bar can be clicked to see the corresponding photo as well, and it will appear below the graph. Hovering over each bar also reveals extra information, such as the time and data the image was posted.")
             ),
             tabPanel("Filter Data",
                      h5("Filter Usage"),
-                     p("Filters are a big part of what differentiates instagram from other social networks. Here is a graph of the user's filters, and how often they use each of them, if at all.
+                     p("Filters are a big part of what differentiates instagram from other social networks. Here is a graph of the user's filters, and how often they use each of them, if at all. To see which filter a bar is describing, hover over it with the mouse.
                        You can use this data to see which filters are more popular to use than others, and compare your filter use to other people!")
             ),
             tabPanel("Why Use the App?",
