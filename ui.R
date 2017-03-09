@@ -16,7 +16,7 @@ ui <- fluidPage(theme = "bootstrap.css",
 
   tags$div(
     h3("What is It?"),
-    p("This is an application that uses the instagram API to gather information and statistics on individual instagram users. It has many different features that tells a lot about a user, how they use instagram, and much more"),
+    p("Statistigram is an application that uses the instagram API to gather information and statistics on individual instagram users. It has many different features that tells a lot about a user, how they use instagram, and much more. It can show the information of two different users, which can be useful to compare and contrast different user's information."),
     
     p(em("Note: only works for our sandbox users due to API restrictions", class = "text-info", class = "small")),
     
@@ -24,7 +24,7 @@ ui <- fluidPage(theme = "bootstrap.css",
     p("The search bar can be used to look up different Instagram users, but is limited to only a few due to instagram's API restrictions on public content. Look up a username and the app finds out all their information."),
     
     h5("The Profile Info"),
-    p("Under the search bar, you can see a users miniature profile page, which includes their profile picture, follower information, and post information"),
+    p("Under the search bar, you can see a users miniature profile page, which includes their profile picture, follower information, and post information."),
   align = "center"),
   
   hr(),
