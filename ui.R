@@ -13,7 +13,7 @@ ui <- fluidPage(theme = "bootstrap.css",
   tags$div(h3("What is It?"),
   p("This is an application that uses the instagram API to gather information and statistics on individual instagram users. It has many different features that tells a lot about a user, how they use instagram, and much more"),
   
-  p(em("Note: only works for our sandbox users", class = "text-info", class = "small")),
+  p(em("Note: only works for our sandbox users due to API restrictions", class = "text-info", class = "small")),
   
   h5("Search Bars"),
   p("The search bar can be used to look up different Instagram users, but is limited to only a few due to instagram's API restrictions on public content. Look up a username and the app finds out all their information."),
@@ -61,12 +61,16 @@ ui <- fluidPage(theme = "bootstrap.css",
         p(strong("Name: "), textOutput("name", inline = TRUE)),
         p(strong("Bio: "), textOutput("bio", inline = TRUE)), class = "well"),
         
+        tags$table(
         p(strong("List of valid usernames to search:")),
         p("accelgor"),
         p("squiwardtennisballs324"),
         p("monmon_hi"),
         p("onaregul_r"),
-        p("trickynicky71")
+        p("trickynicky71"),
+        p("nikicruzz"),
+        p("abigail_oceanna BROKEN"),
+        class = "table table-hover")
       ),
       
       column(3,
