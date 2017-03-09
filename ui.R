@@ -115,7 +115,7 @@ ui <- fluidPage(theme = "bootstrap.css",
         textInput("chosen.search.2", h4("Second User"), placeholder = "Type username here"),
         
         # Display profile for second user
-        tags$div(h4(uiOutput('pic.2', class = "img-thumbnail"), textOutput("selected.user.2", inline = TRUE)),
+        tags$div(h4(uiOutput('pic.2', class = "img-thumbnail"), textOutput("selected.user.2")),
         p(strong("Following: "), textOutput("following.2", inline = TRUE)), 
         p(strong("Followers: "), textOutput("follows.2", inline = TRUE)),
         p(strong("Media Count: "), textOutput("media.count.2", inline = TRUE)),
