@@ -20,8 +20,9 @@ base.url <- "https://api.instagram.com/v1/"
 response <- GET(paste0(base.url, "users/self/?", access.token))
 body <- fromJSON(content(response, "text"))
 
-search.response <- GET(paste0("https://api.instagram.com/v1/users/search?q=abigail_oceanna", "&", access.token))
+search.response <- GET(paste0("https://api.instagram.com/v1/users/search?q=squiwardtennisballs324", "&", access.token))
 search.body <- fromJSON(content(search.response, "text"))
+data.frame(search.body$data)
 
 
 server <- function(input, output) {
@@ -51,7 +52,7 @@ server <- function(input, output) {
     search.body <- fromJSON(content(search.response, "text"))
     
     if(length(search.body$data) == 0){
-      search.response <- GET(paste0("https://api.instagram.com/v1/users/search?q=onaregul", "&", access.token))
+      search.response <- GET(paste0("https://api.instagram.com/v1/users/search?q=squiwardtennisballs324", "&", access.token))
       search.body <- fromJSON(content(search.response, "text"))
     }
     
@@ -89,7 +90,7 @@ server <- function(input, output) {
     search.body <- fromJSON(content(search.response, "text"))
     
     if(length(search.body$data) == 0){
-      search.response <- GET(paste0("https://api.instagram.com/v1/users/search?q=onaregul", "&", access.token))
+      search.response <- GET(paste0("https://api.instagram.com/v1/users/search?q=squiwardtennisballs324", "&", access.token))
       search.body <- fromJSON(content(search.response, "text"))
     }
     
@@ -133,7 +134,7 @@ server <- function(input, output) {
     search.body <- fromJSON(content(search.response, "text"))
     
     if(length(search.body$data) == 0){
-      search.response <- GET(paste0("https://api.instagram.com/v1/users/search?q=onaregul", "&", access.token))
+      search.response <- GET(paste0("https://api.instagram.com/v1/users/search?q=squiwardtennisballs324", "&", access.token))
       search.body <- fromJSON(content(search.response, "text"))
     }
     
@@ -336,7 +337,7 @@ server <- function(input, output) {
     media.result$created_time <- as.POSIXct(as.numeric(media.result$created_time), origin = "1970-01-01")
     colnames(media.result) <- c("Time", "LIKEs", "Comments", "url", "Image")
     g <- ggplot(data = media.result, aes(x = Image, y = LIKEs, fill = factor(Comments), label = Time, label2 = LIKEs, label3 = Comments)) +
-      geom_bar(stat = "identity", color = "purple") + 
+      geom_bar(stat = "identity") + 
       labs(x = "Image #", y = ("LIKES"), fill = "Comments") +
       scale_x_discrete(limits = 1:nrow(media.result))
     g <- ggplotly(g, width = 700, tooltip = c("x", "label", "label2", "label3"), source = "user.1") 
@@ -350,7 +351,7 @@ server <- function(input, output) {
     link <- media.result[bar$x, "images.low_resolution.url"]
 
     if (is.null(bar)) {
-      tags$strong("Click the bar for the Image!!!")
+      tags$strong("Click the bar for the image")
     } else {
       tags$img(src = link)
     }
@@ -368,7 +369,7 @@ server <- function(input, output) {
     media.result$created_time <- as.POSIXct(as.numeric(media.result$created_time), origin = "1970-01-01")
     colnames(media.result) <- c("Time", "LIKEs", "Comments", "url", "Image")
     g <- ggplot(data = media.result, aes(x = Image, y = LIKEs, fill = factor(Comments), label = Time, label2 = LIKEs, label3 = Comments)) +
-      geom_bar(stat = "identity", color = "purple") + 
+      geom_bar(stat = "identity") + 
       labs(x = "Image #", y = ("LIKES"), fill = "Comments") +
       scale_x_discrete(limits = 1:nrow(media.result))
     g <- ggplotly(g, width = 700, tooltip = c("x", "label", "label2", "label3"), source = "user.2") 
@@ -382,7 +383,7 @@ server <- function(input, output) {
     link <- media.result[bar$x, "images.low_resolution.url"]
     
     if (is.null(bar)) {
-      tags$strong("Click the bar for the Image!!!")
+      tags$strong("Click the bar for the image")
     } else {
       tags$img(src = link)
     }
