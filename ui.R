@@ -16,7 +16,7 @@ ui <- fluidPage(theme = "bootstrap.css",
 
   tags$div(
     h3("What is It?"),
-    p("Statistigram is an application that uses the instagram API to gather information and statistics on individual instagram users. It has many different features that tells a lot about a user, how they use instagram, and much more. It can show the information of two different users, which can be useful to compare and contrast different user's information."),
+    p("Statistigram is an application that uses the instagram API to gather information and statistics on individual instagram users. It has many different features that can tell a lot about a user, how they use instagram, and how others view their instagram. Statistigram can show the information of two different users, which can be useful to compare and contrast different user's information."),
     
     p(em("Note: only works for our sandbox users due to API restrictions", class = "text-info", class = "small")),
     
