@@ -69,9 +69,10 @@ ui <- fluidPage(theme = "bootstrap.css",
         textInput("chosen.search", h4("First User"), placeholder = "Type username here"),
     
         # Display profile for first user
-        tags$div(h4(uiOutput('pic', class = "img-thumbnail"), textOutput("selected.user", inline = TRUE)),
-        p(strong("Following: "), textOutput("following", inline = TRUE), strong("Followers: "), textOutput("follows", inline = TRUE),
-        strong("Media Count: "), textOutput("media.count", inline = TRUE)),
+        tags$div(h4(uiOutput('pic', class = "img-thumbnail"), textOutput("selected.user")),
+        p(strong("Following: "), textOutput("following", inline = TRUE)), 
+        p(strong("Followers: "), textOutput("follows", inline = TRUE)),
+        p(strong("Media Count: "), textOutput("media.count", inline = TRUE)),
         p(strong("Name: "), textOutput("name", inline = TRUE)),
         p(strong("Bio: "), textOutput("bio", inline = TRUE)), class = "well"),
         
@@ -115,8 +116,9 @@ ui <- fluidPage(theme = "bootstrap.css",
         
         # Display profile for second user
         tags$div(h4(uiOutput('pic.2', class = "img-thumbnail"), textOutput("selected.user.2", inline = TRUE)),
-        p(strong("Following: "), textOutput("following.2", inline = TRUE), strong("Followers: "), textOutput("follows.2", inline = TRUE),
-        strong("Media Count: "), textOutput("media.count.2", inline = TRUE)),
+        p(strong("Following: "), textOutput("following.2", inline = TRUE)), 
+        p(strong("Followers: "), textOutput("follows.2", inline = TRUE)),
+        p(strong("Media Count: "), textOutput("media.count.2", inline = TRUE)),
         p(strong("Name: "), textOutput("name.2", inline = TRUE)),
         p(strong("Bio: "), textOutput("bio.2", inline = TRUE)), class = "well")
     
