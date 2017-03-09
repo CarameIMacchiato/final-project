@@ -28,7 +28,8 @@ Our app is meant to be a supplement for the instagram app. It allows anyone to g
 
 Published to shinyapps at: https://trepaolini.shinyapps.io/final-project/
 
-* To add more users(limited to 10):
+
+To add more users(limited to 10):
 
 To generate a new access token and add a new user follow this link and use the info found in keys.[id]: url "title"
 
