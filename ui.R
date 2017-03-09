@@ -1,6 +1,10 @@
 library(shiny)
 library(ggplot2)
 library(dplyr)
+library(httr)
+library(jsonlite)
+library(plotly)
+library(leaflet)
 library(shinydashboard)
 #install.packages("shinydashboard")
 
