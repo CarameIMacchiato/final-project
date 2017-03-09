@@ -10,16 +10,17 @@ ui <- fluidPage(theme = "bootstrap.css",
   
   tags$div(h1("InStatistics" ), class = "jumbotron", style = "background-image: url(http://static.tumblr.com/f13b0a6a22dd72346d930867ce349dff/zatppvx/DVQmt82k8/tumblr_static_colour-big.gif); background-size: cover"),
 
-  tags$div(h3("What is It?"),
-  p("This is an application that uses the instagram API to gather information and statistics on individual instagram users. It has many different features that tells a lot about a user, how they use instagram, and much more"),
-  
-  p(em("Note: only works for our sandbox users due to API restrictions", class = "text-info", class = "small")),
-  
-  h5("Search Bars"),
-  p("The search bar can be used to look up different Instagram users, but is limited to only a few due to instagram's API restrictions on public content. Look up a username and the app finds out all their information."),
-  
-  h5("The Profile Info"),
-  p("Under the search bar, you can see a users miniature profile page, which includes their profile picture, follower information, and post information"),
+  tags$div(
+    h3("What is It?"),
+    p("This is an application that uses the instagram API to gather information and statistics on individual instagram users. It has many different features that tells a lot about a user, how they use instagram, and much more"),
+    
+    p(em("Note: only works for our sandbox users due to API restrictions", class = "text-info", class = "small")),
+    
+    h5("Search Bars"),
+    p("The search bar can be used to look up different Instagram users, but is limited to only a few due to instagram's API restrictions on public content. Look up a username and the app finds out all their information."),
+    
+    h5("The Profile Info"),
+    p("Under the search bar, you can see a users miniature profile page, which includes their profile picture, follower information, and post information"),
   align = "center"),
   
   hr(),
@@ -27,21 +28,24 @@ ui <- fluidPage(theme = "bootstrap.css",
   dashboardBody(  
     fluidRow(
       column(12, align = "center", offset = 3,
-          tags$div(tabBox(
+          tabBox(
             tabPanel("Map Info",
-                     h4("Map"),
-                     p("Here you can see on a map where exactly your posts are, this can be a great way to see trips from a vacation or where specifically you post the most.")
+                     h5("Mapped Location Tags"),
+                     p("Here you can see on a map where exactly your posts are, this can be a great way to see trips from a vacation or where specifically you post the most."),
+                     p("This map can show if a person stays in the same area often, or if they have a tendency to travel. It also shows if they even put location tags on their photos or if they post untagged images.")
             ),
             tabPanel("Image Data", 
-                     h4("Image Data"),
-                     p("Here you can see a graph of how many likes and comments a users photos get")
+                     h5("Graphed Image Data"),
+                     p("This graph shows the amount of comments and likes that a user has gotten on their 20 most recent media. The y-axis is based on the amount of likes and the x-axis is the chronological order of the photos, with the most recent photo on the left."),
+                     p("The colors of each bar corresponds with the amount of comments each photo has gotten."),
+                     p("Each bar can be clicked to see the corresponding photo as well, and it will appear below the graph. Hovering over each bar also reveals extra information.")
             ),
-            tabPanel("Filter Use Data",
-                     h4("Filter Use Data"),
-                     p("Filters are a big part of what differentiates instagram from other social networks. Here is a graph of the user's filters, and how often they use each of them (if at all).
+            tabPanel("Filter Data",
+                     h5("Filter Usage"),
+                     p("Filters are a big part of what differentiates instagram from other social networks. Here is a graph of the user's filters, and how often they use each of them, if at all.
                        You can use this data to see which filters are more popular to use than others, and compare your filter use to other people!")
             ),
-          selected = "Map Info"), id = "centeredmenu")
+          selected = "Map Info")
       )
     )
   ),
