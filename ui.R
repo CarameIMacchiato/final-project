@@ -51,11 +51,11 @@ ui <- fluidPage(theme = "bootstrap.css",
             ),
             tabPanel("Why Use the App?",
                      h5("Why Use the App?"),
-                     p("You may be asking, why use this app instead of the instagram app itself? This app's main usage is to help users find out more information about their own instagram use and others use. It conveys information from instagram on a much larger scale than using the app itself."),
+                     p("You may be asking, why use this app instead of the instagram app itself? This app's main usage is to help users find out more information about how they and others use Instagram. It conveys information from instagram on a much larger scale than using the app itself."),
                      h6("For Personal Use"),
-                     p("Our app could be used by many people to show them how they and others use instagram. The main reason people use instagram is to show what they are doing to their friends and family, and our app can make seeing that information clearer. Through the map, users can see where they have been posting from and where others ahve been posting. This can be a great way to see where a user posts the most, where they have posted vacation photos. The filter data can be used to see which filters a user likes the most and could be used to maybe try for more variety in filter use. Though the image data could be used personally to see what photos your friends and family like and comment on the most."),
+                     p("Our app could be used by many people to show them how they and others use instagram. The main reason people use instagram is to show what they are doing to their friends and family, and our app can make seeing that information clearer. Through the map, users can see where they have been posting from and where others have been posting. This can be a great way to see where a user posts the most and where they have posted vacation photos. The filter data can be used to see which filters a user likes the most and could be used to maybe try for more variety in filter use. The image data could be used personally to see what photos your friends and family like and comment on the most."),
                      h6("For Business Use"),
-                     p("Our app can also be used by businesses and digital marketers to gather more information on how successful their instagram presence is. The image data could be used by companies to track which posts are getting the most attention and which are not, to better help shape their decisions on what to advertise through instagram. Companies can also compare how their posts are doing against competitors so that they can try and gain a competitive edge against them. The map could be used by companies that try to market to specific regions, such as geico, to make sure that they are connection to whatever parts of an area need it."),
+                     p("Our app can also be used by businesses and digital marketers to gather more information on how successful their instagram presence is. The image data could be used by companies to track which posts are getting the most attention and which are not, to better help shape their decisions on what to advertise through instagram. Companies can also compare how their posts are doing against competitors so that they can try and gain a competitive edge against them. The map could be used by companies that try to market to specific regions, such as Geico, to make sure that they are reaching their locations of interest."),
                      h6("Conclusion"),
                      p("Our app is meant to be a supplement for the instagram app. It allows anyone to gather a ton of data from the instagram api in a efficient, easy, and interactive way. It would make the job of companies that depend advertising through media presence have a much easier time getting valuable data. Though our app is limited in scope due to api restrictions, it shows that it has tons of potential to be useful for both personal and business use.")
             ),
@@ -73,9 +73,10 @@ ui <- fluidPage(theme = "bootstrap.css",
         textInput("chosen.search", h4("First User"), placeholder = "Type username here"),
     
         # Display profile for first user
-        tags$div(h4(uiOutput('pic', class = "img-thumbnail"), textOutput("selected.user", inline = TRUE)),
-        p(strong("Following: "), textOutput("following", inline = TRUE), strong("Followers: "), textOutput("follows", inline = TRUE),
-        strong("Media Count: "), textOutput("media.count", inline = TRUE)),
+        tags$div(h4(uiOutput('pic', class = "img-thumbnail"), textOutput("selected.user")),
+        p(strong("Following: "), textOutput("following", inline = TRUE)), 
+        p(strong("Followers: "), textOutput("follows", inline = TRUE)),
+        p(strong("Media Count: "), textOutput("media.count", inline = TRUE)),
         p(strong("Name: "), textOutput("name", inline = TRUE)),
         p(strong("Bio: "), textOutput("bio", inline = TRUE)), class = "well"),
         
@@ -118,9 +119,10 @@ ui <- fluidPage(theme = "bootstrap.css",
         textInput("chosen.search.2", h4("Second User"), placeholder = "Type username here"),
         
         # Display profile for second user
-        tags$div(h4(uiOutput('pic.2', class = "img-thumbnail"), textOutput("selected.user.2", inline = TRUE)),
-        p(strong("Following: "), textOutput("following.2", inline = TRUE), strong("Followers: "), textOutput("follows.2", inline = TRUE),
-        strong("Media Count: "), textOutput("media.count.2", inline = TRUE)),
+        tags$div(h4(uiOutput('pic.2', class = "img-thumbnail"), textOutput("selected.user.2")),
+        p(strong("Following: "), textOutput("following.2", inline = TRUE)), 
+        p(strong("Followers: "), textOutput("follows.2", inline = TRUE)),
+        p(strong("Media Count: "), textOutput("media.count.2", inline = TRUE)),
         p(strong("Name: "), textOutput("name.2", inline = TRUE)),
         p(strong("Bio: "), textOutput("bio.2", inline = TRUE)), class = "well")
     
